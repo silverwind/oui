@@ -58,29 +58,18 @@ function parse(data, cb) {
     var result = {}, lines = data.toString().split("\n"), i = 5, j;
     while (true) {
         if (i === lines.length) break;
-        if (lines[i].length === 0 && /([0-9A-F]{2}[-]){2}([0-9A-F]{2})/.test(lines[i + 1])) {
+        if (lines[i].trim().length === 0 && /([0-9A-F]{2}[-]){2}([0-9A-F]{2})/.test(lines[i + 1])) {
             j = i + 2;
             while (true) {
                 if (typeof lines[j] === "undefined" || lines[j].length === 0) break;
                 var oui   = lines[i + 1].substring(2, 10).trim().replace(/-/gm, "");
                 var owner = lines[i + 1].replace(/\(.+\)/, "").substring(10).trim();
+
                 if (owner !== "PRIVATE") {
-                    if (!/^[ \t]*$/gm.test(lines[i + 3])) {
-                        owner += "\n";
-                        owner += lines[i + 3].trim();
-                    }
-                    if (!/^[ \t]*$/gm.test(lines[i + 4])) {
-                        owner += "\n";
-                        owner += lines[i + 4].trim();
-                    }
-                    if (!/^[ \t]*$/gm.test(lines[i + 5])) {
-                        owner += "\n";
-                        owner += lines[i + 5].trim();
-                    }
-                    if (!/^[ \t]*$/gm.test(lines[i + 6])) {
-                        owner += "\n";
-                        owner += lines[i + 6].trim();
-                    }
+                    if (!/^[ \t]*$/gm.test(lines[i + 3])) owner += "\n" + lines[i + 3].trim();
+                    if (!/^[ \t]*$/gm.test(lines[i + 4])) owner += "\n" + lines[i + 4].trim();
+                    if (!/^[ \t]*$/gm.test(lines[i + 5])) owner += "\n" + lines[i + 5].trim();
+                    if (!/^[ \t]*$/gm.test(lines[i + 6])) owner += "\n" + lines[i + 6].trim();
                 } else {
                     result[oui] = "PRIVATE";
                 }
