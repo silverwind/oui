@@ -1,5 +1,5 @@
 #oui <a target="_blank" href="https://npmjs.org/package/oui"><img src="https://badge.fury.io/js/oui.svg" alt="NPM version" height="18"></a> <a target="_blank" href="https://david-dm.org/silverwind/oui"><img src="https://david-dm.org/silverwind/oui.svg" alt="Dependency Status" height="18"></a>
-Lookup MAC-Adresses or their prefixes in the IEEE database.
+Lookup MAC adresses or their prefixes in the IEEE database. The input string can be pretty much any format as long as 6 charactes containing hexadecimal are provided. If you require stricter input parsing, there's the `strict` option.
 
 ##Installation
 ````bash
@@ -7,7 +7,7 @@ npm install oui
 ````
 ##Usage
 ````js
-oui(oui, [options], callback); // `options` should be an object containing options.
+oui(oui, [options], callback);
 ````
 To update the local database from the official IEEE source:
 ````js
@@ -35,6 +35,8 @@ UNITED STATES
 ````
 
 ##Options
+`options` is an object containing below (optional) options:
+
 ###strict
 ````js
 oui(oui, {strict: true}, callback);
