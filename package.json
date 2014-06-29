@@ -1,6 +1,6 @@
 {
   "name": "oui",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "silverwind <me@silverwind.io>",
   "description": "IEEE OUI database lookup utility",
   "homepage": "https://github.com/silverwind/oui",
@@ -27,7 +27,7 @@
     "oui": "oui.js"
   },
   "files": [
-    "index.js",
+    "oui.js",
     "db.json"
   ],
   "dependencies": {
