@@ -7,9 +7,9 @@ npm install oui
 ````
 ##Usage
 ````js
+var oui = require("oui");
 oui(input, [options], callback);
 ````
-
 The `input` string can be pretty much any format as long as 6 charactes containing hexadecimal are provided. If you require stricter input parsing, there's the `strict` option.
 
 To update the local database from the official IEEE source:
@@ -20,7 +20,7 @@ oui.update(callback);
 ##Example
 ````js
 var oui = require("oui");
-oui("20-37-06", function(err, result) {
+oui("20:37:06", function(err, result) {
     if (err) {
         console.log(err);
     } else {
@@ -55,5 +55,5 @@ In strict mode, only these formats of MACs are accepted:
 When installed through `npm install -g oui`, the `oui` command is available:
 
 ````bash
-$ oui 20-37-06
+$ oui 20:37:06
 ````
