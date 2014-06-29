@@ -7,10 +7,12 @@ npm install oui
 ````
 ##Usage
 ````js
-oui(oui, [options], callback);
-oui.update(callback); // Update the database from the IEEE file
+oui(oui, [options], callback); // `options` should be an object containing options.
 ````
-`options` should be an object containing options.
+To update the local database from the official IEEE source
+````js
+oui.update(callback);
+````
 
 ##Example
 ````js
@@ -42,7 +44,7 @@ In strict mode, only these formats of MACs are accepted:
  - 0000.0000.0000
 
 ##CLI
-When installed through `npm install -g oui`, this command is available:
+When installed through `npm install -g oui`, this is available:
 
 ````bash
 $ oui 20-37-06
