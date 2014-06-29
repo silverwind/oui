@@ -10,12 +10,15 @@ npm install oui
 var oui = require("oui");
 oui(input, [options], callback);
 ````
-The `input` string can be pretty much any format as long as 6 charactes containing hexadecimal are provided. If you require stricter input parsing, there's the `strict` option.
+- `input`: The input string. Can be pretty much any format as long as 6 charactes containing hexadecimal are provided.
+- `options`: An object containing module [options](#options).
+- `callback`: The callback function receives `err` (if any) and `result`.
 
 To update the local database from the official IEEE source:
 ````js
 oui.update(callback);
 ````
+- `callback`: The callback function receives `err` (if any).
 
 ##Example
 ````js
@@ -37,6 +40,7 @@ SAN JOSE CA 95134-1706
 UNITED STATES
 ````
 
+<a name="options" />
 ##Options
 `options` is an object containing below (optional) options:
 
