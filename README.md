@@ -57,3 +57,9 @@ When installed through `npm install -g oui`, the `oui` command is available:
 ````bash
 $ oui 20:37:06
 ````
+
+To update the database, run:
+
+````bash
+$ oui --update
+````
