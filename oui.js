@@ -5,16 +5,15 @@ var path   = require("path"),
     fs     = require("fs"),
     got    = require("got"),
     db     = require(path.join(__dirname + "/db.json")),
-    source = "http://standards.ieee.org/develop/regauth/oui/oui.txt";
-
-var strictFormats = [
-    /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/,
-    /^([0-9A-F]{2}[:-]){2}([0-9A-F]{2})$/,
-    /^([0-9A-F]{4}[.]){2}([0-9A-F]{4})$/
-];
+    source = "http://standards.ieee.org/develop/regauth/oui/oui.txt",
+    strictFormats = [
+        /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/,
+        /^([0-9A-F]{2}[:-]){2}([0-9A-F]{2})$/,
+        /^([0-9A-F]{4}[.]){2}([0-9A-F]{4})$/
+    ];
 
 function oui(input, opts, cb) {
-    if (typeof opts === "function" && typeof cb == "undefined") {
+    if (typeof opts === "function" && typeof cb === "undefined") {
         cb = opts;
         opts = null;
     }
@@ -47,10 +46,10 @@ oui.update = function (cb) {
         if (err) {
             if (cb) cb(err);
         } else {
-          parse(data, function(result) {
-              fs.writeFileSync("./db.json", JSON.stringify(result, null, 4));
-              if (cb) cb();
-          });
+            parse(data, function (result) {
+                fs.writeFileSync("./db.json", JSON.stringify(result, null, 4));
+                if (cb) cb();
+            });
         }
     });
 };
@@ -97,7 +96,7 @@ function parse(data, cb) {
 if (!module.parent && process.argv.length >= 2) {
     var arg = process.argv[2];
     if (arg === "--update") {
-        oui.update(function(err) {
+        oui.update(function (err) {
             if (err) {
                 process.stdout.write(err + "\n");
                 process.exit(1);
@@ -116,7 +115,7 @@ if (!module.parent && process.argv.length >= 2) {
         ].join("\n"));
         process.exit(1);
     } else {
-        oui(arg, function(err, result) {
+        oui(arg, function (err, result) {
             if (err) {
                 process.stdout.write(err.message + "\n");
                 process.exit(1);
