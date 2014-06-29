@@ -50,11 +50,13 @@ UNITED STATES
 oui(input, {strict: true}, callback);
 ````
 In strict mode, only these formats of MACs are accepted:
- - 00:00:00
- - 00-00-00
- - 00:00:00:00:00:00
- - 00-00-00-00-00-00
- - 0000.0000.0000
+- 000000
+- 00:00:00
+- 00-00-00
+- 000000000000
+- 0000.0000.0000
+- 00:00:00:00:00:00
+- 00-00-00-00-00-00
 
 ##CLI
 When installed through `npm install -g oui`, the `oui` command is available:
