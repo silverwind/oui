@@ -110,8 +110,8 @@ if (!module.parent && process.argv.length >= 2) {
         process.stdout.write([
             "Usage: ",
             "",
-            "  oui MAC                 Look up and MAC-address or OUI prefix.",
-            "  oui --update            Update the database."
+            "  oui MAC                 Look up an MAC-address or OUI prefix.",
+            "  oui --update            Update the database.\n"
 
         ].join("\n"));
         process.exit(1);
