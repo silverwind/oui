@@ -9,7 +9,7 @@ npm install oui
 ````js
 oui(oui, [options], callback); // `options` should be an object containing options.
 ````
-To update the local database from the official IEEE source
+To update the local database from the official IEEE source:
 ````js
 oui.update(callback);
 ````
@@ -25,7 +25,7 @@ oui("20-37-06", function(err, result) {
     }
 });
 ````
-will print
+will print:
 ````
 CISCO SYSTEMS, INC.
 170 W. TASMAN DRIVE
@@ -35,7 +35,10 @@ UNITED STATES
 ````
 
 ##Options
-###Strict mode
+###strict
+````js
+oui(oui, {strict: true}, callback);
+````
 In strict mode, only these formats of MACs are accepted:
  - 00:00:00
  - 00-00-00
