@@ -1,0 +1,36 @@
+{
+  "name": "oui",
+  "version": "0.0.1",
+  "author": "silverwind <me@silverwind.io>",
+  "description": "IEEE OUI database lookup utility",
+  "homepage": "https://github.com/silverwind/oui",
+  "bugs": "https://github.com/silverwind/oui/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silverwind/oui.git"
+  },
+  "license": "BSD-2-Clause",
+  "engines": {
+    "node": "~0.10.0"
+  },
+  "keywords": [
+    "oui",
+    "lookup",
+    "mac",
+    "address",
+    "ieee",
+    "vendor",
+    "nic",
+    "manufacturer"
+  ],
+  "bin": {
+    "oui": "oui.js"
+  },
+  "files": [
+    "index.js",
+    "db.json"
+  ],
+  "dependencies": {
+    "got": "~0.3.0"
+  }
+}
