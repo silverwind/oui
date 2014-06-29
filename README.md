@@ -42,7 +42,7 @@ UNITED STATES
 
 ###strict
 ````js
-oui(oui, {strict: true}, callback);
+oui(input, {strict: true}, callback);
 ````
 In strict mode, only these formats of MACs are accepted:
  - 00:00:00
