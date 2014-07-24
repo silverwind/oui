@@ -14,14 +14,13 @@
     "node": "~0.10.0"
   },
   "keywords": [
-    "oui",
-    "lookup",
     "mac",
     "address",
-    "ieee",
-    "vendor",
-    "nic",
-    "manufacturer"
+    "mac address",
+    "oui",
+    "lookup",
+    "database",
+    "ieee"
   ],
   "bin": {
     "oui": "oui.js"
