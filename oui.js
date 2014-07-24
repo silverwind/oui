@@ -4,7 +4,7 @@
 var path   = require("path"),
     fs     = require("fs"),
     got    = require("got"),
-    db     = require(path.join(__dirname + "/db.json")),
+    dbPath = path.join(__dirname + "/db.json"),
     source = "http://standards.ieee.org/develop/regauth/oui/oui.txt",
     strictFormats = [
         /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/,
@@ -35,10 +35,21 @@ function oui(input, opts, cb) {
 
     if (input.length < 6) {
         cb(new Error("Please provide at least 6 hexadecimal digits."));
-    } else if (typeof db[input] !== "undefined")  {
-        cb(null, db[input]);
     } else {
-        cb(new Error("Prefix '" + input + "' not found in database."));
+        fs.readFile(dbPath, function (err, data) {
+            var db;
+            if (err) return cb(err);
+            try {
+                db = JSON.parse(data);
+            } catch (err) {
+                return cb(err);
+            }
+            if (typeof db[input] !== "undefined")  {
+                cb(null, db[input]);
+            } else {
+                cb(new Error("Prefix '" + input + "' not found in database."));
+            }
+        });
     }
 }
 
@@ -49,8 +60,9 @@ oui.update = function (cb) {
             if (cb) cb(err);
         } else {
             parse(data, function (result) {
-                fs.writeFileSync("./db.json", JSON.stringify(result, null, 4));
-                if (cb) cb();
+                fs.writeFile(dbPath, JSON.stringify(result, null, 4), function () {
+                    if (cb) cb();
+                });
             });
         }
     });
