@@ -64,16 +64,14 @@ function parse(data, cb) {
             j = i + 2;
             while (true) {
                 if (typeof lines[j] === "undefined" || lines[j].length === 0) break;
-                var oui   = lines[i + 1].substring(2, 10).trim().replace(/-/gm, "");
-                var owner = lines[i + 1].replace(/\(.+\)/, "").substring(10).trim();
+                var oui   = lines[i + 1].substring(2, 10).trim().replace(/-/gm, ""),
+                    owner = lines[i + 1].replace(/\((hex|base 16)\)/, "").substring(10).trim();
 
                 if (owner !== "PRIVATE") {
                     if (!/^[ \t]*$/gm.test(lines[i + 3])) owner += "\n" + lines[i + 3].trim();
                     if (!/^[ \t]*$/gm.test(lines[i + 4])) owner += "\n" + lines[i + 4].trim();
                     if (!/^[ \t]*$/gm.test(lines[i + 5])) owner += "\n" + lines[i + 5].trim();
                     if (!/^[ \t]*$/gm.test(lines[i + 6])) owner += "\n" + lines[i + 6].trim();
-                } else {
-                    result[oui] = "PRIVATE";
                 }
                 result[oui] = owner;
                 j++;
