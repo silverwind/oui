@@ -26,7 +26,7 @@ oui.update(callback);
 var oui = require("oui");
 oui("20:37:06", function(err, result) {
     if (err) {
-        console.log(err);
+        console.error(err);
     } else {
         console.log(result);
     }
