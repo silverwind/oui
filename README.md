@@ -3,26 +3,48 @@
 Lookup MAC adresses or their prefixes in the IEEE database.
 
 ##Installation
-````bash
-npm install oui
-````
+###CLI
+```bash
+npm i -g oui
+```
+###Module
+```bash
+npm i -g oui
+```
 ##Usage
-````js
+###CLI
+```bash
+$ oui 20:37:06
+```
+will print:
+```
+CISCO SYSTEMS, INC.
+170 W. TASMAN DRIVE
+M/S SJA-2
+SAN JOSE CA 95134-1706
+UNITED STATES
+```
+To update the local OUI database from the official IEEE source:
+```bash
+$ oui --update
+```
+###Module
+```js
 var oui = require("oui");
 oui(input, [options], callback);
-````
+```
 - `input`: The input string. Can be pretty much any format as long as 6 charactes containing hexadecimal are provided.
 - `options`: An object containing module [options](#options).
 - `callback`: The callback function receives `err` (if any) and `result`.
 
-To update the local database from the official IEEE source:
-````js
+To update the local OUI database from the official IEEE source:
+```js
 oui.update(callback);
-````
+```
 - `callback`: The callback function receives `err` (if any).
 
-##Example
-````js
+####Example
+```js
 var oui = require("oui");
 oui("20:37:06", function(err, result) {
     if (err) {
@@ -31,24 +53,16 @@ oui("20:37:06", function(err, result) {
         console.log(result);
     }
 });
-````
-will print:
-````
-CISCO SYSTEMS, INC.
-170 W. TASMAN DRIVE
-M/S SJA-2
-SAN JOSE CA 95134-1706
-UNITED STATES
-````
+```
 
 <a name="options" />
 ##Options
 `options` is an object containing below (optional) options:
 
 ###strict
-````js
+```js
 oui(input, {strict: true}, callback);
-````
+```
 In strict mode, only these formats of MACs are accepted:
 - 000000
 - 00:00:00
@@ -57,16 +71,3 @@ In strict mode, only these formats of MACs are accepted:
 - 0000.0000.0000
 - 00:00:00:00:00:00
 - 00-00-00-00-00-00
-
-##CLI
-When installed through `npm install -g oui`, the `oui` command is available:
-
-````bash
-$ oui 20:37:06
-````
-
-To update the database, run:
-
-````bash
-$ oui --update
-````
