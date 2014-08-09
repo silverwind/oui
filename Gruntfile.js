@@ -30,7 +30,7 @@ module.exports = function (grunt) {
                 command: "npm-check-updates -u"
             },
             modules: {
-                command: "rm -rf node_modules && npm install"
+                command: "npm install"
             }
         }
     });
