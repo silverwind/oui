@@ -9,7 +9,7 @@ npm i -g oui
 ```
 ###Module
 ```bash
-npm i -g oui
+npm i oui
 ```
 ##Usage
 ###CLI
