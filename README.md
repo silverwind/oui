@@ -5,11 +5,11 @@ Lookup MAC adresses or their prefixes in the IEEE database.
 ##Installation
 ###CLI
 ```bash
-npm i -g oui
+sudo npm install -g oui
 ```
 ###Module
 ```bash
-npm i oui
+npm install oui
 ```
 ##Usage
 ###CLI
