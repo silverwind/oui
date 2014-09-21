@@ -5,6 +5,8 @@ var db,
     path   = require("path"),
     fs     = require("fs"),
     got    = require("got"),
+    spin   = require("char-spinner"),
+    isCLI  = require.main === module,
     dbPath = path.join(__dirname + "/db.json"),
     source = "http://standards.ieee.org/develop/regauth/oui/oui.txt",
     strictFormats = [
@@ -54,8 +56,19 @@ function oui(input, opts, cb) {
 }
 
 oui.update = function (cb) {
-    process.stdout.write("Fetching " + source + "\n");
+    var interval;
+
+    if (isCLI) {
+        process.stdout.write("Fetching " + source + "\n");
+        interval = spin();
+    }
+
     got(source, function (err, data) {
+        if (isCLI) {
+            if (interval) clearInterval(interval);
+            spin.clear();
+        }
+
         if (err) {
             if (cb) cb(err);
         } else {
@@ -102,17 +115,16 @@ function parse(data, cb) {
     if (cb) cb(result);
 }
 
-if (!module.parent && process.argv.length >= 2) {
+if (isCLI && process.argv.length >= 2) {
     var arg = process.argv[2];
     if (arg === "--update") {
         oui.update(function (err) {
             if (err) {
                 process.stdout.write(err + "\n");
-                process.exit(1);
             } else {
                 process.stdout.write("Database updated successfully!\n");
-                process.exit(0);
             }
+            process.exit(err ? 1 : 0);
         });
     } else if (!arg) {
         fs.readFile(path.join(__dirname + "/package.json"), function (err, data) {

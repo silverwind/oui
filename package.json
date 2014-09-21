@@ -30,6 +30,7 @@
     "db.json"
   ],
   "dependencies": {
+    "char-spinner": "~1.0.1",
     "got": "~1.2.0"
   }
 }
