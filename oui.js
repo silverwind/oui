@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 "use strict";
 
-var path   = require("path"),
+var db,
+    path   = require("path"),
     fs     = require("fs"),
     got    = require("got"),
     dbPath = path.join(__dirname + "/db.json"),
@@ -23,8 +24,8 @@ function oui(input, opts, cb) {
     if (opts && opts.strict) {
         var matched;
         input = input.toUpperCase();
-        strictFormats.forEach(function (regex) {
-            if (regex.test(input)) matched = true;
+        matched = strictFormats.some(function (regex) {
+            if (regex.test(input)) return true;
         });
         if (!matched)
             return cb(new Error("Input '" + input + "' " + "violates strict mode."));
@@ -36,20 +37,19 @@ function oui(input, opts, cb) {
     if (input.length < 6) {
         cb(new Error("Please provide at least 6 hexadecimal digits."));
     } else {
-        fs.readFile(dbPath, function (err, data) {
-            var db;
-            if (err) return cb(err);
-            try {
-                db = JSON.parse(data);
-            } catch (err) {
-                return cb(err);
-            }
-            if (typeof db[input] !== "undefined")  {
-                cb(null, db[input]);
-            } else {
-                cb(new Error("Prefix '" + input + "' not found in database."));
-            }
-        });
+        if (db) {
+            lookup(input, cb);
+        } else {
+            fs.readFile(dbPath, function (err, data) {
+                if (err) return cb(err);
+                try {
+                    db = JSON.parse(data);
+                } catch (err) {
+                    return cb(err);
+                }
+                lookup(input, cb);
+            });
+        }
     }
 }
 
@@ -67,6 +67,14 @@ oui.update = function (cb) {
         }
     });
 };
+
+function lookup(input, cb) {
+    if (typeof db[input] !== "undefined")  {
+        cb(null, db[input]);
+    } else {
+        cb(new Error("Prefix '" + input + "' not found in database."));
+    }
+}
 
 function parse(data, cb) {
     var result = {}, lines = data.toString().split("\n"), i = 5, j;
