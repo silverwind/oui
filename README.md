@@ -5,11 +5,11 @@ Lookup MAC adresses or their prefixes in the IEEE database.
 ##Installation
 ###CLI
 ```bash
-sudo npm install -g oui
+$ [sudo] npm install -g oui
 ```
 ###Module
 ```bash
-npm install oui
+$ npm install oui
 ```
 ##Usage
 ###CLI
@@ -26,7 +26,7 @@ UNITED STATES
 ```
 To update the local OUI database from the official IEEE source:
 ```bash
-$ oui --update
+$ [sudo] oui --update
 ```
 ###Module
 ```js
