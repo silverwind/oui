@@ -32,5 +32,10 @@
   "dependencies": {
     "char-spinner": "~1.0.1",
     "got": "~1.2.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-bump": "~0.0.15",
+    "grunt-shell": "~1.1.1"
   }
 }
