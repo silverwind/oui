@@ -1,4 +1,4 @@
-#oui [![NPM version](https://img.shields.io/npm/v/oui.svg)](https://www.npmjs.org/package/oui) [![Dependency Status](https://david-dm.org/silverwind/oui.svg)](https://david-dm.org/silverwind/oui)
+#oui [![NPM version](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![Dependency Status](http://img.shields.io/david/silverwind/oui.svg?style=flat)](https://david-dm.org/silverwind/oui)
 
 Lookup MAC adresses or their prefixes in the IEEE database.
 
