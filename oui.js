@@ -4,11 +4,10 @@
 var db,
     path   = require("path"),
     fs     = require("fs"),
-    got    = require("got"),
     spin   = require("char-spinner"),
     isCLI  = require.main === module,
     dbPath = path.join(__dirname + "/db.json"),
-    source = "http://standards.ieee.org/develop/regauth/oui/oui.txt",
+    source = "http://www.ieee.org/netstorage/standards/oui.txt",
     strictFormats = [
         /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/,
         /^([0-9A-F]{2}[:-]){2}([0-9A-F]{2})$/,
@@ -63,22 +62,23 @@ oui.update = function (cb) {
         interval = spin();
     }
 
-    got(source, function (err, data) {
-        if (isCLI) {
-            if (interval) clearInterval(interval);
-            spin.clear();
-        }
-
-        if (err) {
-            if (cb) cb(err);
-        } else {
-            parse(data, function (result) {
+    require("http").get(source, function (res) {
+        var body = "";
+        res.on("data", function (data) {
+            body += data;
+        });
+        res.on("end", function () {
+            if (isCLI) {
+                if (interval) clearInterval(interval);
+                spin.clear();
+            }
+            parse(body, function (result) {
                 fs.writeFile(dbPath, JSON.stringify(result, null, 4), function () {
                     if (cb) cb();
                 });
             });
-        }
-    });
+        });
+    }).on("error", cb);
 };
 
 function lookup(input, cb) {
