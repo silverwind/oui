@@ -30,7 +30,8 @@
     "db.json"
   ],
   "dependencies": {
-    "char-spinner": "~1.0.1"
+    "char-spinner": "~1.0.1",
+    "got": "~2.2.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

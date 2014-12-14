@@ -62,23 +62,19 @@ oui.update = function (cb) {
         interval = spin();
     }
 
-    require("http").get(source, function (res) {
-        var body = "";
-        res.on("data", function (data) {
-            body += data;
-        });
-        res.on("end", function () {
-            if (isCLI) {
-                if (interval) clearInterval(interval);
-                spin.clear();
-            }
-            parse(body, function (result) {
-                fs.writeFile(dbPath, JSON.stringify(result, null, 4), function () {
-                    if (cb) cb();
-                });
+    require("got")(source, {encoding: 'utf8'}, function (err, body) {
+        if (isCLI) {
+            if (err) return process.stdout.write(err);
+            if (interval) clearInterval(interval);
+            spin.clear();
+        }
+        if (err) return cb(err);
+        parse(body.split("\n"), function (result) {
+            fs.writeFile(dbPath, JSON.stringify(result, null, 4), function () {
+                if (cb) cb();
             });
         });
-    }).on("error", cb);
+    });
 };
 
 function lookup(input, cb) {
@@ -89,8 +85,8 @@ function lookup(input, cb) {
     }
 }
 
-function parse(data, cb) {
-    var result = {}, lines = data.toString().split("\n"), i = 5;
+function parse(lines, cb) {
+    var result = {}, i = 5;
     do {
         if (lines[i].trim().length === 0 && /([0-9A-F]{2}[-]){2}([0-9A-F]{2})/.test(lines[i + 1])) {
             var oui   = lines[i + 2].substring(2, 10).trim(),
