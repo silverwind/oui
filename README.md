@@ -71,3 +71,5 @@ In strict mode, only these formats of MACs are accepted:
 - 0000.0000.0000
 - 00:00:00:00:00:00
 - 00-00-00-00-00-00
+
+© 2014-2015 [silverwind](https://github.com/silverwind), distributed under BSD licence
