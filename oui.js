@@ -4,6 +4,7 @@
 var db,
     path   = require("path"),
     fs     = require("fs"),
+    spin   = require("char-spinner"),
     isCLI  = require.main === module,
     dbPath = path.join(__dirname + "/db.json"),
     source = "http://standards.ieee.org/develop/regauth/oui/oui.txt",
@@ -54,11 +55,24 @@ function oui(input, opts, cb) {
 }
 
 oui.update = function (cb) {
-    var progress = isCLI && require("download-status")();
-    new require("download")().get(source).use(progress).run(function (err, files) {
-        if (err && cb) return cb(err);
-        parse(String(files[0]._contents).split("\n"), function (result) {
-            fs.writeFile(dbPath, JSON.stringify(result, null, 4), cb && cb);
+    var interval;
+
+    if (isCLI) {
+        process.stdout.write("Fetching " + source + " ...\n");
+        interval = spin();
+    }
+
+    require("got")(source, function (err, body) {
+        if (isCLI) {
+            if (err) return process.stdout.write(err);
+            if (interval) clearInterval(interval);
+            spin.clear();
+        }
+        if (err) return cb(err);
+        parse(body.split("\n"), function (result) {
+            fs.writeFile(dbPath, JSON.stringify(result, null, 4), function () {
+                if (cb) cb();
+            });
         });
     });
 };
