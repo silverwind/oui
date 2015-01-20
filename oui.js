@@ -71,22 +71,26 @@ function lookup(input, cb) {
     }
 }
 
+function isStart(firstLine, secondLine) {
+    if (firstLine === undefined || secondLine === undefined) return false;
+    return firstLine.trim().length === 0 && /([0-9A-F]{2}[-]){2}([0-9A-F]{2})/.test(secondLine);
+}
+
 function parse(lines, cb) {
-    var result = {}, i = 5;
-    do {
-        if (lines[i].trim().length === 0 && /([0-9A-F]{2}[-]){2}([0-9A-F]{2})/.test(lines[i + 1])) {
+    var result = {}, i = 6;
+    while (i !== lines.length) {
+        if (isStart(lines[i], lines[i + 1])) {
             var oui   = lines[i + 2].substring(2, 10).trim(),
                 owner = lines[i + 1].replace(/\((hex|base 16)\)/, "").substring(10).trim();
 
-            if (owner !== "PRIVATE") {
-                if (lines[i + 3] && lines[i + 2].trim()) owner += "\n" + lines[i + 3].trim();
-                if (lines[i + 4] && lines[i + 4].trim()) owner += "\n" + lines[i + 4].trim();
-                if (lines[i + 5] && lines[i + 5].trim()) owner += "\n" + lines[i + 5].trim();
-                if (lines[i + 6] && lines[i + 6].trim()) owner += "\n" + lines[i + 6].trim();
+            i += 3;
+            while (!isStart(lines[i], lines[i + 1]) && i < lines.length) {
+                if (lines[i] && lines[i].trim()) owner += "\n" + lines[i].trim();
+                i++;
             }
             result[oui] = owner;
         }
-    } while (++i !== lines.length);
+    }
     if (cb) cb(result);
 }
 
