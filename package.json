@@ -21,7 +21,9 @@
     "oui",
     "lookup",
     "database",
-    "ieee"
+    "ieee",
+    "hardware",
+    "organizationally unique identifier"
   ],
   "bin": {
     "oui": "oui.js"
@@ -35,8 +37,8 @@
     "download-status": "^2.1.1"
   },
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-bump": "~0.0.16",
-    "grunt-shell": "~1.1.1"
+    "grunt": "^0.4.5",
+    "grunt-bump": "^0.0.16",
+    "grunt-shell": "^1.1.1"
   }
 }
