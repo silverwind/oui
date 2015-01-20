@@ -4,10 +4,9 @@
 var db,
     path   = require("path"),
     fs     = require("fs"),
-    spin   = require("char-spinner"),
     isCLI  = require.main === module,
     dbPath = path.join(__dirname + "/db.json"),
-    source = "http://www.ieee.org/netstorage/standards/oui.txt",
+    source = "http://standards.ieee.org/develop/regauth/oui/oui.txt",
     strictFormats = [
         /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/,
         /^([0-9A-F]{2}[:-]){2}([0-9A-F]{2})$/,
@@ -55,24 +54,11 @@ function oui(input, opts, cb) {
 }
 
 oui.update = function (cb) {
-    var interval;
-
-    if (isCLI) {
-        process.stdout.write("Fetching " + source + "\n");
-        interval = spin();
-    }
-
-    require("got")(source, {encoding: 'utf8'}, function (err, body) {
-        if (isCLI) {
-            if (err) return process.stdout.write(err);
-            if (interval) clearInterval(interval);
-            spin.clear();
-        }
-        if (err) return cb(err);
-        parse(body.split("\n"), function (result) {
-            fs.writeFile(dbPath, JSON.stringify(result, null, 4), function () {
-                if (cb) cb();
-            });
+    var progress = isCLI && require("download-status")();
+    new require("download")().get(source).use(progress).run(function (err, files) {
+        if (err && cb) return cb(err);
+        parse(String(files[0]._contents).split("\n"), function (result) {
+            fs.writeFile(dbPath, JSON.stringify(result, null, 4), cb && cb);
         });
     });
 };
@@ -93,10 +79,10 @@ function parse(lines, cb) {
                 owner = lines[i + 1].replace(/\((hex|base 16)\)/, "").substring(10).trim();
 
             if (owner !== "PRIVATE") {
-                if (lines[i + 3].trim()) owner += "\n" + lines[i + 3].trim();
-                if (lines[i + 4].trim()) owner += "\n" + lines[i + 4].trim();
-                if (lines[i + 5].trim()) owner += "\n" + lines[i + 5].trim();
-                if (lines[i + 6].trim()) owner += "\n" + lines[i + 6].trim();
+                if (lines[i + 3] && lines[i + 2].trim()) owner += "\n" + lines[i + 3].trim();
+                if (lines[i + 4] && lines[i + 4].trim()) owner += "\n" + lines[i + 4].trim();
+                if (lines[i + 5] && lines[i + 5].trim()) owner += "\n" + lines[i + 5].trim();
+                if (lines[i + 6] && lines[i + 6].trim()) owner += "\n" + lines[i + 6].trim();
             }
             result[oui] = owner;
         }
