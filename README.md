@@ -1,18 +1,18 @@
-#oui [![NPM version](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![Dependency Status](http://img.shields.io/david/silverwind/oui.svg?style=flat)](https://david-dm.org/silverwind/oui)
+# oui [![NPM version](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![Dependency Status](http://img.shields.io/david/silverwind/oui.svg?style=flat)](https://david-dm.org/silverwind/oui)
 
 Lookup MAC adresses or their prefixes in the IEEE database.
 
-##Installation
-###CLI
+## Installation
+### CLI
 ```bash
 $ [sudo] npm install -g oui
 ```
-###Module
+### Module
 ```bash
 $ npm install oui
 ```
-##Usage
-###CLI
+## Usage
+### CLI
 ```bash
 $ oui 20:37:06
 ```
@@ -28,7 +28,7 @@ To update the local OUI database from the official IEEE source:
 ```bash
 $ [sudo] oui --update
 ```
-###Module
+### Module
 ```js
 var oui = require("oui");
 oui(input, [options], callback);
@@ -43,7 +43,7 @@ oui.update(callback);
 ```
 - `callback`: The callback function receives `err` (if any).
 
-####Example
+#### Example
 ```js
 var oui = require("oui");
 oui("20:37:06", function(err, result) {
@@ -56,10 +56,10 @@ oui("20:37:06", function(err, result) {
 ```
 
 <a name="options" />
-##Options
+## Options
 `options` is an object containing below (optional) options:
 
-###strict
+### strict
 ```js
 oui(input, {strict: true}, callback);
 ```
