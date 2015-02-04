@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 "use strict";
 
+process.title = "oui";
+
 var db,
     path   = require("path"),
     fs     = require("fs"),
@@ -120,20 +122,17 @@ if (isCLI && process.argv.length >= 2) {
             process.exit(err ? 1 : 0);
         });
     } else if (!arg) {
-        fs.readFile(path.join(__dirname + "/package.json"), function (err, data) {
-            var pkg = JSON.parse(data);
-            process.stdout.write([
-                "",
-                "  Usage: oui mac [options]",
-                "",
-                "  Options:",
-                "",
-                "    --update    update the database",
-                "",
-                ""
-            ].join("\n"));
-            process.exit(1);
-        });
+        process.stdout.write([
+            "",
+            "  Usage: oui mac [options]",
+            "",
+            "  Options:",
+            "",
+            "    --update    update the database",
+            "",
+            ""
+        ].join("\n"));
+        process.exit(1);
     } else {
         oui(arg, function (err, result) {
             if (err) {
