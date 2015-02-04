@@ -123,11 +123,14 @@ if (isCLI && process.argv.length >= 2) {
         fs.readFile(path.join(__dirname + "/package.json"), function (err, data) {
             var pkg = JSON.parse(data);
             process.stdout.write([
-                pkg.name + "@" + pkg.version + " - " + pkg.homepage,
                 "",
-                "Usage: ",
-                "  oui MAC                 Look up an MAC-address or OUI prefix.",
-                "  oui --update            Update the database.\n"
+                "  Usage: oui mac [options]",
+                "",
+                "  Options:",
+                "",
+                "    --update    update the database",
+                "",
+                ""
             ].join("\n"));
             process.exit(1);
         });
