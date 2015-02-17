@@ -121,13 +121,14 @@ if (isCLI && process.argv.length >= 2) {
             }
             process.exit(err ? 1 : 0);
         });
-    } else if (!arg) {
+    } else if (!arg || arg === "--help") {
         process.stdout.write([
             "",
             "  Usage: oui mac [options]",
             "",
             "  Options:",
             "",
+            "    --help      display this help",
             "    --update    update the database",
             "",
             ""
