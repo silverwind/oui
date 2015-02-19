@@ -3,7 +3,7 @@
 
 process.title = "oui";
 
-var db,
+var db     = require("./db.json"),
     path   = require("path"),
     fs     = require("fs"),
     spin   = require("char-spinner"),
@@ -24,36 +24,25 @@ function oui(input, opts, cb) {
         opts = null;
     }
 
+    if (typeof input !== "string") return cb(new Error("Input not a string"));
+
+    input = input.toUpperCase();
+
     if (opts && opts.strict) {
-        var matched;
-        input = input.toUpperCase();
-        matched = strictFormats.some(function (regex) {
+        var matched = strictFormats.some(function (regex) {
             if (regex.test(input)) return true;
         });
-        if (!matched)
-            return cb(new Error("Input '" + input + "' " + "violates strict mode."));
+
+        if (!matched) return cb(new Error("Input not in strict format"));
+
         input = input.replace(/[.:-]/g, "").substring(0, 6);
     } else {
-        input = input.replace(/[^0-9a-fA-F]/g, "").substring(0, 6).toUpperCase();
+        input = input.replace(/[^0-9a-fA-F]/g, "").substring(0, 6);
     }
 
-    if (input.length < 6) {
-        cb(new Error("Please provide at least 6 hexadecimal digits."));
-    } else {
-        if (db) {
-            lookup(input, cb);
-        } else {
-            fs.readFile(dbPath, function (err, data) {
-                if (err) return cb(err);
-                try {
-                    db = JSON.parse(data);
-                } catch (err) {
-                    return cb(err);
-                }
-                lookup(input, cb);
-            });
-        }
-    }
+    if (input.length < 6) return cb(new Error("Input too short"));
+
+    cb(null, db[input]);
 }
 
 oui.update = function (cb) {
@@ -66,11 +55,13 @@ oui.update = function (cb) {
 
     require("got")(source, function (err, body) {
         if (isCLI) {
-            if (err) return process.stdout.write(err);
             if (interval) clearInterval(interval);
             spin.clear();
+            if (err) return process.stdout.write(err);
+        } else {
+            if (err) return cb(err);
         }
-        if (err) return cb(err);
+
         parse(body.split("\n"), function (result) {
             fs.writeFile(dbPath, JSON.stringify(result, null, 4), function () {
                 if (cb) cb();
@@ -78,14 +69,6 @@ oui.update = function (cb) {
         });
     });
 };
-
-function lookup(input, cb) {
-    if (typeof db[input] !== "undefined")  {
-        cb(null, db[input]);
-    } else {
-        cb(new Error("Prefix '" + input + "' not found in database."));
-    }
-}
 
 function isStart(firstLine, secondLine) {
     if (firstLine === undefined || secondLine === undefined) return false;
@@ -140,7 +123,11 @@ if (isCLI && process.argv.length >= 2) {
                 process.stdout.write(err.message + "\n");
                 process.exit(1);
             } else {
-                process.stdout.write(result + "\n");
+                if (result) {
+                    process.stdout.write(result + "\n");
+                } else {
+                    process.stdout.write(arg + " not found in database\n");
+                }
                 process.exit(0);
             }
         });
