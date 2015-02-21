@@ -47,11 +47,7 @@ function oui(input, opts, cb) {
 
 oui.update = function (cb) {
     var interval;
-
-    if (isCLI) {
-        process.stdout.write("Fetching " + source + " ...\n");
-        interval = spin();
-    }
+    if (isCLI) interval = spin();
 
     require("got")(source, function (err, body) {
         if (isCLI) {
@@ -97,11 +93,7 @@ if (isCLI && process.argv.length >= 2) {
     var arg = process.argv[2];
     if (arg === "--update") {
         oui.update(function (err) {
-            if (err) {
-                process.stdout.write(err + "\n");
-            } else {
-                process.stdout.write("Database updated successfully!\n");
-            }
+            if (err) process.stdout.write(err + "\n");
             process.exit(err ? 1 : 0);
         });
     } else if (!arg || arg === "--help") {
