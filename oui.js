@@ -26,7 +26,7 @@ if (arg === "--update") {
         "",
         ""
     ].join("\n"));
-    process.exit(1);
+    process.exit(0);
 } else {
     var result;
     try {
@@ -36,10 +36,10 @@ if (arg === "--update") {
         process.exit(1);
     }
 
-    if (result) {
+    if (result)
         process.stdout.write(result + "\n");
-    } else {
+    else
         process.stdout.write(arg + " not found in database\n");
-    }
+
     process.exit(0);
 }
