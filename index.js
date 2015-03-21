@@ -29,7 +29,7 @@ var oui = function oui(input, opts) {
     }
 
     if (input.length < 6) return null;
-    return db[input];
+    return db[input] || null;
 };
 
 oui.update = function (cb) {
