@@ -2,7 +2,7 @@
   "name": "oui",
   "version": "2.3.5",
   "author": "silverwind <me@silverwind.io>",
-  "description": "IEEE OUI database lookup utility",
+  "description": "Look up MAC addresses for their vendor in the IEEE OUI database",
   "homepage": "https://github.com/silverwind/oui",
   "bugs": "https://github.com/silverwind/oui/issues",
   "repository": {

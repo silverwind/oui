@@ -28,13 +28,18 @@ if (arg === "--update") {
     ].join("\n"));
     process.exit(1);
 } else {
-    oui(arg, function (err, result) {
-        if (err) process.stdout.write(err.message + "\n");
-        if (result) {
-            process.stdout.write(result + "\n");
-        } else {
-            process.stdout.write(arg + " not found in database\n");
-        }
-        process.exit(err ? 1 : 0);
-    });
+    var result;
+    try {
+        result = oui(arg);
+    } catch (err) {
+        process.stdout.write(err.message + "\n");
+        process.exit(1);
+    }
+
+    if (result) {
+        process.stdout.write(result + "\n");
+    } else {
+        process.stdout.write(arg + " not found in database\n");
+    }
+    process.exit(0);
 }

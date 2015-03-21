@@ -1,23 +1,13 @@
 # oui [![NPM version](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![Dependency Status](http://img.shields.io/david/silverwind/oui.svg?style=flat)](https://david-dm.org/silverwind/oui)
+> Look up MAC addresses for their vendor in the IEEE OUI database
 
-Lookup MAC adresses or their prefixes in the IEEE database.
-
-## Installation
-### CLI
+## Installation (CLI)
 ```bash
 $ [sudo] npm install -g oui
 ```
-### Module
-```bash
-$ npm install oui
+## Example (CLI)
 ```
-## Usage
-### CLI
-```bash
 $ oui 20:37:06
-```
-will print:
-```
 CISCO SYSTEMS, INC.
 170 W. TASMAN DRIVE
 M/S SJA-2
@@ -28,42 +18,31 @@ To update the local OUI database from the official IEEE source:
 ```bash
 $ [sudo] oui --update
 ```
-### Module
+
+## Installation (Module)
+```bash
+$ npm install --save oui
+```
+### Example (Module)
 ```js
 var oui = require("oui");
-oui(input, [options], callback);
+oui("203706");
+//=> 'CISCO SYSTEMS, INC.\n170 W. TASMAN DRIVE\nM/S SJA-2\nSAN JOSE CA 95134-1706\nUNITED STATES'
 ```
-- `input`: The input string. Can be pretty much any format as long as 6 charactes containing hexadecimal are provided.
-- `options`: An object containing module [options](#options).
-- `callback`: The callback function receives `err` (if any) and `result`.
 
-To update the local OUI database from the official IEEE source:
-```js
-oui.update(callback);
-```
-- `callback`: The callback function receives `err` (if any).
+## API
+### oui(input, [options]);
+- `input`: The input string. Non-hexadecimal characters and characters after 6 matching characters are found are ignored.
+- `options`: An optional [options](#options) object.
 
-#### Example
-```js
-var oui = require("oui");
-oui("20:37:06", function(err, result) {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(result);
-    }
-});
-```
+Returns either a string, or `null` if no matches are found. Throws on invalid input.
+
+### oui.update(cb);
+- `cb`: The callback function receives `err` (if any).
 
 <a name="options" />
-## Options
-`options` is an object containing below (optional) options:
-
-### strict
-```js
-oui(input, {strict: true}, callback);
-```
-In strict mode, only these formats of MACs are accepted:
+#### options.strict
+If `true`, only these formats of MACs are accepted:
 - 000000
 - 00:00:00
 - 00-00-00
