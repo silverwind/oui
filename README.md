@@ -35,7 +35,7 @@ oui("203706");
 - `input`: The input string. Non-hexadecimal characters and characters after 6 matching characters are found are ignored.
 - `options`: An optional [options](#options) object.
 
-Returns either a string, or `null` if no matches are found. Throws on invalid input.
+Returns either a string, or `null` if no matches are found. Throws if input is not a string.
 
 ### oui.update(cb);
 - `cb`: The callback function receives `err` (if any).
@@ -50,5 +50,7 @@ If `true`, only these formats of MACs are accepted:
 - 0000.0000.0000
 - 00:00:00:00:00:00
 - 00-00-00-00-00-00
+
+When an invalid format is detected in strict mode, `oui()` will throw.
 
 © 2014-2015 [silverwind](https://github.com/silverwind), distributed under BSD licence
