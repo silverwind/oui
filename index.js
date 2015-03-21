@@ -36,8 +36,8 @@ oui.update = function (cb) {
     require("./update.js")(false, function (err, newdb) {
         if (err) return cb(err);
         db = newdb;
-        cb(null);
-    });
+        if (cb) cb(null);
+    }, true);
 };
 
 module.exports = oui;
