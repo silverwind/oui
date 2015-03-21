@@ -9,7 +9,7 @@ var arg  = process.argv[2],
 
 if (arg === "--update") {
     var interval = spin();
-    oui.update(function (err) {
+    oui.update(true, function (err) {
         clearInterval(interval);
         if (err) process.stdout.write(err + "\n");
         process.exit(err ? 1 : 0);

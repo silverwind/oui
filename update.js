@@ -11,8 +11,12 @@ module.exports = function update(isCLI, cb) {
     got(SOURCE, function (err, body) {
         if (err) return cb(err);
         parse(body.split("\n"), function (result) {
-            cb(null, result);
-            fs.writeFile(dbPath, JSON.stringify(result, null, 4));
+            if (!isCLI) {
+                cb(null, result);
+                fs.writeFile(dbPath, JSON.stringify(result, null, 1));
+            } else {
+                fs.writeFile(dbPath, JSON.stringify(result, null, 1), cb);
+            }
         });
     });
 };

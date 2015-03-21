@@ -28,7 +28,9 @@
     "oui": "oui.js"
   },
   "files": [
+    "index.js",
     "oui.js",
+    "update.js",
     "db.json"
   ],
   "dependencies": {

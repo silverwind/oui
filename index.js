@@ -33,7 +33,7 @@ var oui = function oui(input, opts) {
 };
 
 oui.update = function (cb) {
-    require("./update.js")(true, function (err, newdb) {
+    require("./update.js")(false, function (err, newdb) {
         if (err) return cb(err);
         db = newdb;
         cb(null);

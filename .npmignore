@@ -1,7 +1,0 @@
-oui*.tgz
-.editorconfig
-.npmignore
-.gitignore
-.gitattributes
-.jshintrc
-Gruntfile.js
