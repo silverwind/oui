@@ -1,6 +1,8 @@
 # oui [![NPM version](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![Dependency Status](http://img.shields.io/david/silverwind/oui.svg?style=flat)](https://david-dm.org/silverwind/oui)
 > Look up MAC addresses for their vendor in the IEEE OUI database
 
+*Note: The module API changed to sync starting with 3.0.0*
+
 ## Installation (CLI)
 ```bash
 $ [sudo] npm install -g oui
@@ -26,7 +28,7 @@ $ npm install --save oui
 ### Example (Module)
 ```js
 var oui = require("oui");
-oui("203706");
+console.log(oui("203706"));
 //=> 'CISCO SYSTEMS, INC.\n170 W. TASMAN DRIVE\nM/S SJA-2\nSAN JOSE CA 95134-1706\nUNITED STATES'
 ```
 
