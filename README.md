@@ -29,7 +29,11 @@ $ npm install --save oui
 ```js
 var oui = require("oui");
 console.log(oui("203706"));
-//=> 'CISCO SYSTEMS, INC.\n170 W. TASMAN DRIVE\nM/S SJA-2\nSAN JOSE CA 95134-1706\nUNITED STATES'
+//=> CISCO SYSTEMS, INC.
+//=> 170 W. TASMAN DRIVE
+//=> M/S SJA-2
+//=> SAN JOSE CA 95134-1706
+//=> UNITED STATES
 ```
 
 ## API
