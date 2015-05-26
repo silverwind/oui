@@ -3,12 +3,7 @@
   "version": "3.0.8",
   "author": "silverwind <me@silverwind.io>",
   "description": "Look up MAC addresses for their vendor in the IEEE OUI database",
-  "homepage": "https://github.com/silverwind/oui",
-  "bugs": "https://github.com/silverwind/oui/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/silverwind/oui.git"
-  },
+  "repository": "silverwind/oui",
   "license": "BSD-2-Clause",
   "keywords": [
     "mac",
