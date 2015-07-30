@@ -8,8 +8,7 @@ var fs     = require("fs"),
 var SOURCE = "http://standards.ieee.org/develop/regauth/oui/oui.txt";
 
 module.exports = function update(isCLI, cb) {
-    got(SOURCE, function (err, body) {
-        if (err) return cb(err);
+    got(SOURCE).catch(cb).then(function (body) {
         parse(body.split("\n"), function (result) {
             if (!isCLI) {
                 cb(null, result);
