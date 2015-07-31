@@ -8,8 +8,8 @@ var fs     = require("fs"),
 var SOURCE = "http://standards.ieee.org/develop/regauth/oui/oui.txt";
 
 module.exports = function update(isCLI, cb) {
-    got(SOURCE).catch(cb).then(function (body) {
-        parse(body.split("\n"), function (result) {
+    got(SOURCE).catch(cb).then(function (res) {
+        parse(res.body.split("\n"), function (result) {
             if (!isCLI) {
                 cb(null, result);
                 fs.writeFile(dbPath, JSON.stringify(result, null, 1));

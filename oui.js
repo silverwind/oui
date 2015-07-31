@@ -3,12 +3,10 @@
 
 process.title = "oui";
 
-var arg  = process.argv[2],
-    oui  = require("./"),
-    spin = require("char-spinner");
+var arg  = process.argv[2];
 
 if (arg === "--update") {
-    var interval = spin();
+    var interval = require("char-spinner")();
     require("./update.js")(true, function (err) {
         clearInterval(interval);
         if (err) process.stdout.write(err + "\n");
@@ -28,6 +26,7 @@ if (arg === "--update") {
     ].join("\n"));
     process.exit(0);
 } else {
+    var oui = require("./");
     var result;
     try {
         result = oui(arg);
