@@ -3,12 +3,14 @@
 
 var fs     = require("fs");
 var got    = require("got");
-var dbPath = require("path").join(__dirname + "/db.json");
+var dbPath = require("path").join(__dirname, "db.json");
 var source = "http://standards.ieee.org/develop/regauth/oui/oui.txt";
 
 module.exports = function update(isCLI, cb) {
   got(source).catch(cb).then(function (res) {
+    console.log("parsing");
     parse(res.body.split("\n"), function (result) {
+      console.log("writing");
       if (!isCLI) {
         cb(null, result);
         fs.writeFile(dbPath, JSON.stringify(result, null, 1));
