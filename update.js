@@ -36,7 +36,7 @@ function parse(lines, cb) {
         if (lines[i] && lines[i].trim()) owner += "\n" + lines[i].trim();
         i++;
       }
-      result[oui] = owner;
+      result[oui] = owner.replace(/[\ \t]+/gm, " ");
     }
   }
   if (cb) cb(result);
