@@ -42,9 +42,9 @@ function parse(lines, cb) {
       owner = owner.replace(/[\ \t]+/gm, " ");
 
       // replace country shortcodes
-      var shortCode = (/\n([A-Z]+)$/.exec(owner) || [])[1];
+      var shortCode = (/\n([A-Z]{2})$/.exec(owner) || [])[1];
       if (shortCode && countries[shortCode]) {
-        owner = owner.replace(/\n[A-Z]+$/, "\n" + countries[shortCode].name);
+        owner = owner.replace(/\n.+$/, "\n" + countries[shortCode].name);
       }
 
       result[oui] = owner.replace(/[\ \t]+/gm, " ");
