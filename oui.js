@@ -26,7 +26,8 @@ if (arg === "--update") {
   ].join("\n"));
   process.exit(0);
 } else {
-  var oui = require("./"), result;
+  var oui = require("./");
+  var result;
   try {
     result = oui(arg);
   } catch (err) {

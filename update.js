@@ -8,9 +8,7 @@ var source = "http://standards.ieee.org/develop/regauth/oui/oui.txt";
 
 module.exports = function update(isCLI, cb) {
   got(source).catch(cb).then(function (res) {
-    console.log("parsing");
     parse(res.body.split("\n"), function (result) {
-      console.log("writing");
       if (!isCLI) {
         cb(null, result);
         fs.writeFile(dbPath, JSON.stringify(result, null, 1));
@@ -27,10 +25,10 @@ function isStart(firstLine, secondLine) {
 }
 
 function parse(lines, cb) {
-  var result = {}, i = 6;
+  var result = {}, i = 3;
   while (i !== lines.length) {
     if (isStart(lines[i], lines[i + 1])) {
-      var oui   = lines[i + 2].substring(2, 10).trim();
+      var oui   = lines[i + 2].substring(0, 6).trim();
       var owner = lines[i + 1].replace(/\((hex|base 16)\)/, "").substring(10).trim();
 
       i += 3;
