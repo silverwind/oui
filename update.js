@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 "use strict";
 
-var fs     = require("fs");
-var got    = require("got");
-var dbPath = require("path").join(__dirname, "db.json");
-var source = "http://standards.ieee.org/develop/regauth/oui/oui.txt";
+var fs        = require("fs");
+var got       = require("got");
+var dbPath    = require("path").join(__dirname, "db.json");
+var countries = require("country-data").countries;
+var source    = "http://standards.ieee.org/develop/regauth/oui/oui.txt";
 
 module.exports = function update(isCLI, cb) {
   got(source).catch(cb).then(function (res) {
@@ -36,6 +37,16 @@ function parse(lines, cb) {
         if (lines[i] && lines[i].trim()) owner += "\n" + lines[i].trim();
         i++;
       }
+
+      // remove excessive whitespace
+      owner = owner.replace(/[\ \t]+/gm, " ");
+
+      // replace country shortcodes
+      var shortCode = (/\n([A-Z]+)$/.exec(owner) || [])[1];
+      if (shortCode && countries[shortCode]) {
+        owner = owner.replace(/\n[A-Z]+$/, "\n" + countries[shortCode].name);
+      }
+
       result[oui] = owner.replace(/[\ \t]+/gm, " ");
     }
   }

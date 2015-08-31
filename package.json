@@ -27,6 +27,7 @@
   ],
   "dependencies": {
     "char-spinner": "^1.0.1",
+    "country-data": "0.0.22",
     "got": "^4.1.1"
   },
   "devDependencies": {
