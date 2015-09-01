@@ -1,11 +1,11 @@
 # oui [![NPM version](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![Dependency Status](http://img.shields.io/david/silverwind/oui.svg?style=flat)](https://david-dm.org/silverwind/oui)
 > Look up MAC addresses for their vendor in the IEEE OUI database
 
-## Installation (Module)
+## Installation
 ```bash
 $ npm i --save oui
 ```
-### Example (Module)
+### Example
 ```js
 var oui = require("oui");
 console.log(oui("20:37:06:11:22:33"));
