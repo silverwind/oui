@@ -47,7 +47,7 @@ function parse(lines, cb) {
         owner = owner.replace(/\n.+$/, "\n" + countries[shortCode].name);
       }
 
-      result[oui] = owner.replace(/[\ \t]+/gm, " ");
+      result[oui] = owner;
     }
   }
   if (cb) cb(result);
