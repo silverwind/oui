@@ -1,44 +1,42 @@
 # oui [![NPM version](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![Dependency Status](http://img.shields.io/david/silverwind/oui.svg?style=flat)](https://david-dm.org/silverwind/oui)
 > Look up MAC addresses for their vendor in the IEEE OUI database
 
-*Note: The module API changed to sync starting with 3.0.0*
-
-## Installation (CLI)
-```bash
-$ [sudo] npm install -g oui
-```
-## Example (CLI)
-```
-$ oui 20:37:06
-CISCO SYSTEMS, INC.
-170 W. TASMAN DRIVE
-M/S SJA-2
-SAN JOSE CA 95134-1706
-UNITED STATES
-```
-To update the local OUI database from the official IEEE source:
-```bash
-$ [sudo] oui --update
-```
-
 ## Installation (Module)
 ```bash
-$ npm install --save oui
+$ npm i --save oui
 ```
 ### Example (Module)
 ```js
 var oui = require("oui");
-console.log(oui("203706"));
-//=> CISCO SYSTEMS, INC.
-//=> 170 W. TASMAN DRIVE
-//=> M/S SJA-2
-//=> SAN JOSE CA 95134-1706
-//=> UNITED STATES
+console.log(oui("20:37:06:11:22:33"));
+//=> Cisco Systems, Inc
+//=> 80 West Tasman Drive
+//=> San Jose CA 94568
+//=> United States
+```
+
+## Installation (CLI)
+```bash
+$ npm i -g oui
+```
+## Example (CLI)
+```
+$ oui 20:37:06
+Cisco Systems, Inc
+80 West Tasman Drive
+San Jose CA 94568
+United States
+```
+You can, for example, omit the colons and it'll just take the first 6 valid hex characters.
+
+To update the local OUI database from the official IEEE source:
+```bash
+$ oui --update
 ```
 
 ## API
 ### oui(input, [options]);
-- `input`: The input string. Non-hexadecimal characters and characters after 6 matching characters are found are ignored.
+- `input`: The input string. Non-hexadecimal characters and characters after 6 hex characters are found are ignored unless `options.strict` is set.
 - `options`: An optional [options](#options) object.
 
 Returns either a string, or `null` if no matches are found. Throws if input is not a string.
