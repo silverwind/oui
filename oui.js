@@ -21,10 +21,13 @@ if (arg === "--update") {
     "",
     "    --help      display this help",
     "    --update    update the database",
+    "    --version   print the version",
     "",
     ""
   ].join("\n"));
   process.exit(0);
+} else if (arg === "-v" || arg === "-V" || arg === "--version") {
+  process.stdout.write(require("./package.json").version + "\n");
 } else {
   var oui = require("./");
   var result;
