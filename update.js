@@ -9,9 +9,9 @@ var countries = require("country-data").countries;
 var source    = "http://standards.ieee.org/develop/regauth/oui/oui.txt";
 
 module.exports = function update(isCLI, cb) {
-  got(source).catch(cb).then(function (res) {
-    parse(res.body.split("\n"), function (result) {
-      var str = stringify(result, {space: 1, cmp: function (a, b) {
+  got(source).catch(cb).then(function(res) {
+    parse(res.body.split("\n"), function(result) {
+      var str = stringify(result, {space: 1, cmp: function(a, b) {
         return parseInt(a.key, 16) > parseInt(b.key, 16) ? 1 : -1;
       }});
       if (!isCLI) {

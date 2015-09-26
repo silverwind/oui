@@ -16,7 +16,7 @@ var oui = function oui(input, opts) {
   input = input.toUpperCase();
 
   if (opts && opts.strict === true) {
-    var isStrict = strictFormats.some(function (regex) {
+    var isStrict = strictFormats.some(function(regex) {
       if (regex.test(input)) return true;
     });
 
@@ -32,8 +32,8 @@ var oui = function oui(input, opts) {
   return db[input] || null;
 };
 
-oui.update = function (cb) {
-  require("./update.js")(false, function (err, newdb) {
+oui.update = function(cb) {
+  require("./update.js")(false, function(err, newdb) {
     if (err) return cb(err);
     db = newdb;
     if (cb) cb(null);
