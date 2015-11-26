@@ -30,10 +30,5 @@
     "country-data": "0.0.23",
     "got": "^5.0.0",
     "json-stable-stringify": "^1.0.0"
-  },
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-bump": "^0.6.0",
-    "grunt-shell": "^1.1.2"
   }
 }
