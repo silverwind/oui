@@ -23,4 +23,4 @@ patch: lint npm-patch publish
 minor: lint npm-minor publish
 major: lint npm-major publish
 
-.PHONY: lint touch publish update patch minor major npm-patch npm-minor npm-major
+.PHONY: lint publish update npm-patch npm-minor npm-major patch minor major
