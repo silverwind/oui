@@ -28,7 +28,7 @@
   "dependencies": {
     "char-spinner": "^1.0.1",
     "country-data": "0.0.24",
-    "got": "^5.2.0",
+    "got": "^5.2.1",
     "json-stable-stringify": "^1.0.0"
   }
 }
