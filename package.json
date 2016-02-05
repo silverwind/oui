@@ -19,6 +19,9 @@
   "bin": {
     "oui": "oui.js"
   },
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "files": [
     "index.js",
     "oui.js",
@@ -30,6 +33,7 @@
     "country-data": "0.0.24",
     "get-stdin": "^5.0.1",
     "got": "^6.1.1",
-    "json-stable-stringify": "^1.0.1"
+    "json-stable-stringify": "^1.0.1",
+    "pinkie-promise": "^2.0.0"
   }
 }
