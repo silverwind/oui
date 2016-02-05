@@ -2,7 +2,7 @@
 > Look up MAC addresses for their vendor in the IEEE OUI database
 
 ## Installation
-```bash
+```console
 $ npm i --save oui
 ```
 ### Example
@@ -16,21 +16,27 @@ console.log(oui("20:37:06:11:22:33"));
 ```
 
 ## Installation (CLI)
-```bash
+```console
 $ npm i -g oui
 ```
 ## Example (CLI)
-```
+Either provide the lookup digits as an argument or on stdin:
+```console
 $ oui 20:37:06
 Cisco Systems, Inc
 80 West Tasman Drive
 San Jose CA 94568
 United States
 ```
-You can, for example, omit the colons and it'll just take the first 6 valid hex characters.
-
+```console
+$ echo "203706" | oui
+Cisco Systems, Inc
+80 West Tasman Drive
+San Jose CA 94568
+United States
+```
 To update the local OUI database from the official IEEE source:
-```bash
+```console
 $ oui --update
 ```
 
