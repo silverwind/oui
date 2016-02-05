@@ -1,5 +1,5 @@
 lint:
-	eslint --color --quiet *.js
+	eslint *.js
 
 publish:
 	git push -u --tags origin master
