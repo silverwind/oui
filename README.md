@@ -22,14 +22,14 @@ $ npm i -g oui
 ## Example (CLI)
 Either provide the lookup digits as an argument or on stdin:
 ```console
-$ oui 20:37:06
+$ oui 20:37:06:12:34:56
 Cisco Systems, Inc
 80 West Tasman Drive
 San Jose CA 94568
 United States
 ```
 ```console
-$ echo "203706" | oui
+$ echo 203706 | oui
 Cisco Systems, Inc
 80 West Tasman Drive
 San Jose CA 94568
