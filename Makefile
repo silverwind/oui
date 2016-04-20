@@ -6,7 +6,7 @@ publish:
 	npm publish
 
 update:
-	ncu -ua
+	ncu --packageFile package.json -ua
 	rm -rf node_modules
 	npm install
 
