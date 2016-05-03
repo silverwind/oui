@@ -46,7 +46,7 @@ function parse(lines, cb) {
       oui = oui.toUpperCase();
 
       // remove excessive whitespace
-      owner = owner.replace(/[\ \t]+/gm, " ");
+      owner = owner.replace(/[ \t]+/gm, " ");
 
       // replace country shortcodes
       var shortCode = (/\n([A-Z]{2})$/.exec(owner) || [])[1];
