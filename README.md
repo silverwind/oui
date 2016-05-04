@@ -5,7 +5,7 @@
 ```console
 $ npm i --save oui
 ```
-### Example
+## Example
 ```js
 var oui = require("oui");
 console.log(oui("20:37:06:11:22:33"));
