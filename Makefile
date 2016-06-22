@@ -11,19 +11,13 @@ update:
 	npm install
 
 npm-patch:
-	mv node_modules _node_modules
 	npm version patch
-	mv _node_modules node_modules
 
 npm-minor:
-	mv node_modules _node_modules
 	npm version minor
-	mv _node_modules node_modules
 
 npm-major:
-	mv node_modules _node_modules
 	npm version major
-	mv _node_modules node_modules
 
 patch: lint npm-patch publish
 minor: lint npm-minor publish
