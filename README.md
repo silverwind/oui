@@ -63,4 +63,4 @@ If `true`, only these formats of MACs are accepted:
 
 A lookup will throw when an invalid format is supplied strict mode.
 
-© 2014-2015 [silverwind](https://github.com/silverwind), distributed under BSD licence
+© [silverwind](https://github.com/silverwind), distributed under BSD licence
