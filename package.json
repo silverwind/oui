@@ -30,7 +30,7 @@
   ],
   "dependencies": {
     "char-spinner": "^1.0.1",
-    "country-data": "0.0.30",
+    "country-data": "0.0.24",
     "get-stdin": "^5.0.1",
     "got": "^6.5.0",
     "json-stable-stringify": "^1.0.1",
