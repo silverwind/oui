@@ -8,7 +8,7 @@ publish:
 update:
 	ncu --packageFile package.json -ua
 	rm -rf node_modules
-	npm install
+	yarn
 
 npm-patch:
 	npm version patch
