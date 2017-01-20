@@ -38,8 +38,15 @@ var oui = function oui(input, opts) {
   return db[input] || null;
 };
 
-oui.update = function(url, cb) {
-  require("./update.js")({cli: false, url: url}, function(err, newdb) {
+oui.update = function(opts, cb) {
+  if (typeof opts === "function") {
+    opts = null;
+    cb = opts;
+  }
+
+  opts = opts || {};
+
+  require("./update.js")({cli: false}, function(err, newdb) {
     if (err) return cb(err);
     db = newdb;
     if (cb) cb(null);

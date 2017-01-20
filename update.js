@@ -6,6 +6,7 @@ var got       = require("got");
 var stringify = require("json-stable-stringify");
 var path      = require("path");
 var countries = require("country-data").countries;
+var noop      = function() {};
 
 module.exports = function update(opts, cb) {
   opts = opts || {};
@@ -18,7 +19,7 @@ module.exports = function update(opts, cb) {
       }});
       if (!opts.cli) {
         cb(null, result);
-        fs.writeFile(opts.file, str);
+        fs.writeFile(opts.file, str, noop);
       } else {
         fs.writeFile(opts.file, str, cb);
       }
