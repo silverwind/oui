@@ -42,16 +42,21 @@ $ oui --update
 
 ## API
 ### oui(input, [options])
-- `input`: The input string. Non-hexadecimal characters and characters after 6 hex characters are found are ignored unless `options.strict` is set.
-- `options`: An optional [options](#options) object.
+- `input` *String*: The input string. Non-hexadecimal characters and characters after 6 hex characters are found are ignored unless `options.strict` is set.
+- `options` *Object*: An optional [options](#options) object.
+  - `strict` *Boolean*: When `true`, only [strict input formats will be accepted](#strictformats). Will throw an error when an invalid format is supplied.
+  - `file` *String*: A absolute file path to `oui.json`, which contains the parsed oui data. Defaults to the `oui.json` in the module directory.
 
 Returns either a string, or `null` if no matches are found. Throws if input is not a string.
 
 ### oui.update(cb)
-- `cb`: The callback function receives `err` (if any).
+- `cb` *Function*: The callback function receives `err` (if any).
+- `options` *Object*: An optional [options](#options) object.
+  - `url` *String*: The URL from where to retrieve `oui.txt`. Defaults to `'http://linuxnet.ca/ieee/oui.txt'`. To use the more inconsistent and slower to download original file from IEEE, use `'http://standards.ieee.org/develop/regauth/oui/oui.txt'`.
+  - `file` *String*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to. Defaults to the `oui.json` in the module directory.
 
-<a name="options" />
-#### options.strict
+<a name="strictformats" />
+#### strict formats
 If `true`, only these formats of MACs are accepted:
 - `000000`
 - `00:00:00`
@@ -60,7 +65,5 @@ If `true`, only these formats of MACs are accepted:
 - `0000.0000.0000`
 - `00:00:00:00:00:00`
 - `00-00-00-00-00-00`
-
-A lookup will throw when an invalid format is supplied strict mode.
 
 © [silverwind](https://github.com/silverwind), distributed under BSD licence

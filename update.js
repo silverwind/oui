@@ -4,21 +4,23 @@
 var fs        = require("fs");
 var got       = require("got");
 var stringify = require("json-stable-stringify");
-var dbPath    = require("path").join(__dirname, "db.json");
+var path      = require("path");
 var countries = require("country-data").countries;
-var source    = "http://standards.ieee.org/develop/regauth/oui/oui.txt";
 
-module.exports = function update(isCLI, cb) {
-  got(source).catch(cb).then(function(res) {
+module.exports = function update(opts, cb) {
+  opts = opts || {};
+  opts.url = opts.url || "http://linuxnet.ca/ieee/oui.txt";
+  opts.file = opts.file || path.join(__dirname, "oui.json");
+  got(opts.url).catch(cb).then(function(res) {
     parse(res.body.split("\n"), function(result) {
       var str = stringify(result, {space: 1, cmp: function(a, b) {
         return parseInt(a.key, 16) > parseInt(b.key, 16) ? 1 : -1;
       }});
-      if (!isCLI) {
+      if (!opts.cli) {
         cb(null, result);
-        fs.writeFile(dbPath, str);
+        fs.writeFile(opts.file, str);
       } else {
-        fs.writeFile(dbPath, str, cb);
+        fs.writeFile(opts.file, str, cb);
       }
     });
   });

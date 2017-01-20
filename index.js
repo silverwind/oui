@@ -1,6 +1,6 @@
 "use strict";
 
-var db = require("./db.json");
+var db;
 var strictFormats = [
   /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i,
   /^([0-9A-F]{2}[:-]){2}([0-9A-F]{2})$/i,
@@ -13,9 +13,15 @@ var oui = function oui(input, opts) {
   if (typeof input !== "string")
     throw new Error("Input not a string");
 
+  opts = opts || {};
+
+  if (!db) {
+    db = require(opts.file || "./oui.json");
+  }
+
   input = input.toUpperCase();
 
-  if (opts && opts.strict === true) {
+  if (opts.strict === true) {
     var isStrict = strictFormats.some(function(regex) {
       if (regex.test(input)) return true;
     });
@@ -32,8 +38,8 @@ var oui = function oui(input, opts) {
   return db[input] || null;
 };
 
-oui.update = function(cb) {
-  require("./update.js")(false, function(err, newdb) {
+oui.update = function(url, cb) {
+  require("./update.js")({cli: false, url: url}, function(err, newdb) {
     if (err) return cb(err);
     db = newdb;
     if (cb) cb(null);

@@ -17,7 +17,7 @@ require("get-stdin")().then(function(str) {
 function parseArgs(arg) {
   if (arg === "--update") {
     var interval = require("char-spinner")();
-    require("./update.js")(true, function(err) {
+    require("./update.js")({cli: true}, function(err) {
       clearInterval(interval);
       if (err) process.stdout.write(err + "\n");
       process.exit(err ? 1 : 0);
