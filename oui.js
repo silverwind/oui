@@ -4,7 +4,7 @@
 process.title = "oui";
 
 // node 0.10 compat
-global.Promise = require("pinkie-promise");
+this.Promise = require("pinkie-promise");
 
 require("get-stdin")().then(function(str) {
   str = str.trim();
