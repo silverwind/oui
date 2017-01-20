@@ -1,4 +1,4 @@
-# oui [![NPM version](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![Dependency Status](http://img.shields.io/david/silverwind/oui.svg?style=flat)](https://david-dm.org/silverwind/oui)
+# oui [![NPM version](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![Dependency Status](http://img.shields.io/david/silverwind/oui.svg?style=flat)](https://david-dm.org/silverwind/oui) [![Build Status](https://api.travis-ci.org/silverwind/oui.svg?style=flat)](https://travis-ci.org/silverwind/oui)
 > Look up MAC addresses for their vendor in the IEEE OUI database
 
 ## Installation
