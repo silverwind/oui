@@ -5,6 +5,9 @@
   "description": "Look up MAC addresses for their vendor in the IEEE OUI database",
   "repository": "silverwind/oui",
   "license": "BSD-2-Clause",
+  "scripts": {
+    "test": "node test.js"
+  },
   "keywords": [
     "mac",
     "address",
