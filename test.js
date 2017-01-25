@@ -16,3 +16,10 @@ assert.throws(() => { oui("20370", {strict: true}); }, Error);
 assert.throws(() => { oui("abcd", {strict: true}); }, Error);
 assert.throws(() => { oui(null, {strict: true}); }, Error);
 assert.throws(() => { oui(undefined, {strict: true}); }, Error);
+
+oui.update({url: "abc"}, function(err) {
+  assert.ok(err);
+  oui.update({test: true}, function(err) {
+    assert.equal(err, null);
+  });
+});

@@ -45,8 +45,9 @@ oui.update = function(opts, cb) {
   }
 
   opts = opts || {};
+  opts.cli = false;
 
-  require("./update.js")({cli: false}, function(err, newdb) {
+  require("./update.js")(opts, function(err, newdb) {
     if (err) return cb(err);
     db = newdb;
     if (cb) cb(null);

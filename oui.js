@@ -17,7 +17,11 @@ require("get-stdin")().then(function(str) {
 function parseArgs(arg) {
   if (arg === "--update") {
     var interval = require("char-spinner")();
-    require("./update.js")({cli: true}, function(err) {
+
+    require("./update.js")({
+      cli: true,
+      url: process.argv[3],
+    }, function(err) {
       clearInterval(interval);
       if (err) process.stdout.write(err + "\n");
       process.exit(err ? 1 : 0);
@@ -25,15 +29,19 @@ function parseArgs(arg) {
   } else if (!arg || arg === "--help") {
     process.stdout.write([
       "",
-      "  Usage: oui mac [options]",
+      "  Usage: oui [mac]|[options]",
       "",
       "  Options:",
       "",
-      "    --help      display this help",
-      "    --update    update the database",
-      "    --version   print the version",
+      "    --help           display this help text",
+      "    --update [url]   update the database with optional source URL",
+      "    --version        print the version",
       "",
-      ""
+      "  Examples:",
+      "    oui 20:37:06:12:34:56",
+      "    oui 203706",
+      "    echo 20:37:06:12:34:56 | oui",
+      "    oui --update",
     ].join("\n"));
     process.exit(0);
   } else if (arg === "-v" || arg === "-V" || arg === "--version") {
