@@ -44,7 +44,7 @@ $ oui --update
 Or from the original IEEE source (slow):
 ```console
 $ oui --update http://standards.ieee.org/develop/regauth/oui/oui.txt
-``
+```
 
 ## API
 ### oui(input, [options])
