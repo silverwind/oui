@@ -9,33 +9,41 @@ var countries = require("country-data").countries;
 var url       = require("url");
 var noop      = function() {};
 
-module.exports = function update(opts, cb) {
-  opts = opts || {};
-  opts.url = opts.url || "http://linuxnet.ca/ieee/oui.txt";
-  opts.file = opts.file || path.join(__dirname, "oui.json");
+module.exports = function update(opts) {
+  return new Promise(function(resolve, reject) {
+    opts = Object.assign({
+      url: "http://linuxnet.ca/ieee/oui.txt",
+      file: path.join(__dirname, "oui.json"),
+    }, opts);
 
-  var uri = url.parse(opts.url);
-  if (!uri.protocol || !uri.hostname) {
-    return cb(new Error("Invalid source URL '" + opts.url + "'"));
-  }
+    var uri = url.parse(opts.url);
+    if (!uri.protocol || !uri.hostname) {
+      return reject(new Error("Invalid source URL '" + opts.url + "'"));
+    }
 
-  got(opts.url).catch(cb).then(function(res) {
-    parse(res.body.split("\n"), function(result) {
-      var str = stringify(result, {space: 1, cmp: function(a, b) {
-        return parseInt(a.key, 16) > parseInt(b.key, 16) ? 1 : -1;
-      }});
+    got(opts.url).catch(reject).then(function(res) {
+      parse(res.body.split("\n"), function(result) {
+        var str = stringify(result, {space: 1, cmp: function(a, b) {
+          return parseInt(a.key, 16) > parseInt(b.key, 16) ? 1 : -1;
+        }});
 
-      if (opts.test) {
-        return cb(null, result);
-      }
+        if (opts.test) {
+          return resolve(result);
+        }
 
-      if (!opts.cli) {
-        cb(null, result);
-        fs.writeFile(opts.file, str, noop);
-      } else {
-        fs.writeFile(opts.file, str, cb);
-      }
-    });
+        if (!opts.cli) {
+          resolve(result);
+          fs.writeFile(opts.file, str, noop);
+        } else {
+          fs.writeFile(opts.file, str, function(err) {
+            if (err)
+              reject(err);
+            else
+              resolve(result);
+          });
+        }
+      });
+    }).catch(reject);
   });
 };
 

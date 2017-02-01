@@ -6,7 +6,7 @@
   "repository": "silverwind/oui",
   "license": "BSD-2-Clause",
   "scripts": {
-    "test": "node test.js"
+    "test": "node --trace-deprecation --throw-deprecation test.js"
   },
   "keywords": [
     "mac",
@@ -23,7 +23,7 @@
     "oui": "oui.js"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "files": [
     "index.js",
@@ -36,7 +36,6 @@
     "country-data": "0.0.31",
     "get-stdin": "^5.0.1",
     "got": "^6.7.1",
-    "json-stable-stringify": "^1.0.1",
-    "pinkie-promise": "^2.0.1"
+    "json-stable-stringify": "^1.0.1"
   }
 }

@@ -3,9 +3,6 @@
 
 process.title = "oui";
 
-// node 0.10 compat
-this.Promise = require("pinkie-promise");
-
 require("get-stdin")().then(function(str) {
   str = str.trim();
   if (str)
@@ -21,10 +18,13 @@ function parseArgs(arg) {
     require("./update.js")({
       cli: true,
       url: process.argv[3],
-    }, function(err) {
+    }).then(function() {
       clearInterval(interval);
-      if (err) process.stdout.write(err + "\n");
-      process.exit(err ? 1 : 0);
+      process.exit(0);
+    }).catch(function(err) {
+      clearInterval(interval);
+      process.stdout.write(err + "\n");
+      process.exit(1);
     });
   } else if (!arg || arg === "--help") {
     process.stdout.write([
@@ -41,6 +41,7 @@ function parseArgs(arg) {
       "    oui 20:37:06:12:34:56",
       "    oui 203706",
       "    echo 20:37:06:12:34:56 | oui",
+      "    echo 203706 | oui",
       "    oui --update",
     ].join("\n"));
     process.exit(0);
@@ -52,11 +53,9 @@ function parseArgs(arg) {
 }
 
 function lookup(str) {
-  var oui = require("./");
   var result;
-
   try {
-    result = oui(str);
+    result = require(".")(str);
   } catch (err) {
     process.stdout.write(err.message + "\n");
     process.exit(1);

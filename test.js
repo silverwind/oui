@@ -17,9 +17,11 @@ assert.throws(() => { oui("abcd", {strict: true}); }, Error);
 assert.throws(() => { oui(null, {strict: true}); }, Error);
 assert.throws(() => { oui(undefined, {strict: true}); }, Error);
 
-oui.update({url: "abc"}, function(err) {
-  assert.ok(err);
-  oui.update({test: true}, function(err) {
-    assert.equal(err, null);
+oui.update({url: "abc"}).then(function() {
+  throw new Error("should not be called");
+}).catch(function(err) {
+  assert.ok(err instanceof Error);
+  oui.update({test: true}).catch(function(err) {
+    throw err;
   });
 });

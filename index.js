@@ -13,7 +13,7 @@ var oui = function oui(input, opts) {
   if (typeof input !== "string")
     throw new Error("Input not a string");
 
-  opts = opts || {};
+  opts = Object.assign({}, opts);
 
   if (!db) {
     db = require(opts.file || "./oui.json");
@@ -26,8 +26,9 @@ var oui = function oui(input, opts) {
       if (regex.test(input)) return true;
     });
 
-    if (!isStrict)
+    if (!isStrict) {
       throw new Error("Input not in strict format");
+    }
 
     input = input.replace(/[.:-]/g, "").substring(0, 6);
   } else {
@@ -38,20 +39,14 @@ var oui = function oui(input, opts) {
   return db[input] || null;
 };
 
-oui.update = function(opts, cb) {
-  if (typeof opts === "function") {
-    opts = null;
-    cb = opts;
-  }
-
-  opts = opts || {};
-  opts.cli = false;
-
-  require("./update.js")(opts, function(err, newdb) {
-    if (err) return cb(err);
-    db = newdb;
-    if (cb) cb(null);
-  }, true);
+oui.update = function(opts) {
+  return new Promise(function(resolve, reject) {
+    opts = Object.assign({cli: false}, opts);
+    require("./update.js")(opts).then(function(newdb) {
+      db = newdb;
+      resolve();
+    }).catch(reject);
+  });
 };
 
 module.exports = oui;

@@ -57,11 +57,12 @@ $ oui --update http://standards.ieee.org/develop/regauth/oui/oui.txt
 
 Returns either a string, or `null` if no matches are found. Throws if input is not a string.
 
-### oui.update([options], cb)
+### oui.update([options])
 - `options` *Object*: A optional options object.
   - `url` *String*: The URL from where to retrieve `oui.txt`. Defaults to `'http://linuxnet.ca/ieee/oui.txt'`. To use the more inconsistent and slower to download original file from IEEE, use `'http://standards.ieee.org/develop/regauth/oui/oui.txt'`.
   - `file` *String*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to. Defaults to the `oui.json` in the module directory.
-- `cb` *Function*: The callback function receives `err` (if any).
+
+Returns: A Promise that indicates when the internal database has been updated.
 
 <a name="strictformats" />
 #### strict formats
