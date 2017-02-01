@@ -6,7 +6,7 @@ The data used in this module comes from the [Sanitized IEEE OUI Data](http://lin
 
 ## Installation
 ```console
-$ npm i --save oui
+$ npm install --save oui
 ```
 ## Example
 ```js
@@ -19,8 +19,9 @@ console.log(oui("20:37:06:12:34:56"));
 ```
 
 ## Installation (CLI)
+Install [Node.js](https://nodejs.org) and then do:
 ```console
-$ npm i -g oui
+$ sudo npm install -g oui
 ```
 ## Example (CLI)
 Either provide the lookup digits as an argument or on stdin:
