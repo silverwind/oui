@@ -55,14 +55,14 @@ $ oui --update http://standards.ieee.org/develop/regauth/oui/oui.txt
   - `strict` *Boolean*: When `true`, only [strict input formats will be accepted](#strictformats). Will throw an error when an invalid format is supplied.
   - `file` *String*: A absolute file path to `oui.json`, which contains the parsed oui data. Defaults to the `oui.json` in the module directory.
 
-Returns either a string, or `null` if no matches are found. Throws if input is not a string.
+Returns: Either a string, or `null` if no matches are found. Throws if input is not a string.
 
 ### oui.update([options])
 - `options` *Object*: A optional options object.
   - `url` *String*: The URL from where to retrieve `oui.txt`. Defaults to `'http://linuxnet.ca/ieee/oui.txt'`. To use the more inconsistent and slower to download original file from IEEE, use `'http://standards.ieee.org/develop/regauth/oui/oui.txt'`.
   - `file` *String*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to. Defaults to the `oui.json` in the module directory.
 
-Returns: A Promise that indicates when the internal database has been updated.
+Returns: A Promise that indicates when the internal database has been updated. Rejects on error.
 
 <a name="strictformats" />
 #### strict formats
