@@ -13,12 +13,11 @@ require("get-stdin")().then(function(str) {
 
 function parseArgs(arg) {
   if (arg === "--update") {
-    var interval = require("char-spinner")();
+    const interval = require("char-spinner")();
+    const opts = {cli: true};
+    if (process.argv[3]) opts.url = process.argv[3];
 
-    require("./update.js")({
-      cli: true,
-      url: process.argv[3],
-    }).then(function() {
+    require("./update.js")(opts).then(function() {
       clearInterval(interval);
       process.exit(0);
     }).catch(function(err) {

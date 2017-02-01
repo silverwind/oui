@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 "use strict";
 
-var fs        = require("fs");
-var got       = require("got");
-var stringify = require("json-stable-stringify");
-var path      = require("path");
-var countries = require("country-data").countries;
-var url       = require("url");
-var noop      = function() {};
+const fs        = require("fs");
+const got       = require("got");
+const stringify = require("json-stable-stringify");
+const path      = require("path");
+const countries = require("country-data").countries;
+const url       = require("url");
+const noop      = function() {};
 
 module.exports = function update(opts) {
   return new Promise(function(resolve, reject) {
@@ -16,14 +16,14 @@ module.exports = function update(opts) {
       file: path.join(__dirname, "oui.json"),
     }, opts);
 
-    var uri = url.parse(opts.url);
+    const uri = url.parse(opts.url);
     if (!uri.protocol || !uri.hostname) {
       return reject(new Error("Invalid source URL '" + opts.url + "'"));
     }
 
     got(opts.url).catch(reject).then(function(res) {
       parse(res.body.split("\n"), function(result) {
-        var str = stringify(result, {space: 1, cmp: function(a, b) {
+        const str = stringify(result, {space: 1, cmp: function(a, b) {
           return parseInt(a.key, 16) > parseInt(b.key, 16) ? 1 : -1;
         }});
 
@@ -53,7 +53,8 @@ function isStart(firstLine, secondLine) {
 }
 
 function parse(lines, cb) {
-  var result = {}, i = 3;
+  const result = {};
+  var i = 3;
   while (i !== lines.length) {
     if (isStart(lines[i], lines[i + 1])) {
       var oui   = lines[i + 2].substring(0, 6).trim();
@@ -72,7 +73,7 @@ function parse(lines, cb) {
       owner = owner.replace(/[ \t]+/gm, " ");
 
       // replace country shortcodes
-      var shortCode = (/\n([A-Z]{2})$/.exec(owner) || [])[1];
+      const shortCode = (/\n([A-Z]{2})$/.exec(owner) || [])[1];
       if (shortCode && countries[shortCode]) {
         owner = owner.replace(/\n.+$/, "\n" + countries[shortCode].name);
       }

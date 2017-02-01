@@ -1,7 +1,7 @@
 "use strict";
 
 var db;
-var strictFormats = [
+const strictFormats = [
   /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i,
   /^([0-9A-F]{2}[:-]){2}([0-9A-F]{2})$/i,
   /^([0-9A-F]{4}[.]){2}([0-9A-F]{4})$/i,
@@ -9,7 +9,7 @@ var strictFormats = [
   /^[0-9A-F]{12}$/i
 ];
 
-var oui = function oui(input, opts) {
+var oui = module.exports = function oui(input, opts) {
   if (typeof input !== "string")
     throw new Error("Input not a string");
 
@@ -22,7 +22,7 @@ var oui = function oui(input, opts) {
   input = input.toUpperCase();
 
   if (opts.strict === true) {
-    var isStrict = strictFormats.some(function(regex) {
+    const isStrict = strictFormats.some(function(regex) {
       if (regex.test(input)) return true;
     });
 
@@ -48,5 +48,3 @@ oui.update = function(opts) {
     }).catch(reject);
   });
 };
-
-module.exports = oui;
