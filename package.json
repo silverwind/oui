@@ -33,9 +33,11 @@
   ],
   "dependencies": {
     "char-spinner": "^1.0.1",
+    "columnify": "^1.5.4",
     "country-data": "0.0.31",
     "get-stdin": "^5.0.1",
     "got": "^6.7.1",
-    "json-stable-stringify": "^1.0.1"
+    "json-stable-stringify": "^1.0.1",
+    "minimatch": "^3.0.3"
   }
 }

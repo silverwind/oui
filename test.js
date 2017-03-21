@@ -9,6 +9,10 @@ assert.ok(/cisco/i.test(oui("20:37:6")));
 assert.ok(/cisco/i.test(oui("20:37:06:11:22:33")));
 assert.ok(/cisco/i.test(oui("20:37:6:11:22:33")));
 
+assert.ok(oui.search("*Juniper Systems*").length >= 1);
+assert.ok(oui.search(["*Juniper Systems*"]).length >= 1);
+assert.ok(oui.search(["*Juniper*", "*Systems*"]).length >= 1);
+
 assert.equal(oui("20370"), null);
 
 assert.throws(() => { oui(null); }, Error);

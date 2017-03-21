@@ -39,11 +39,28 @@ var oui = module.exports = function oui(input, opts) {
   return db[input] || null;
 };
 
-// Zero-pad colon notation as seen in BSD `arp`. eg. 1:2:3 should become 01:02:03
-function zeroPad(str) {
-  if (!/^[0-9A-F:]+$/.test(str)) return str;
-  return str.split(":").map(part => part.length === 1 ? "0" + part : part).join(":");
-}
+oui.search = function(inputs, opts) {
+  if (typeof inputs !== "string" && !Array.isArray(inputs))
+    throw new Error("Input not a string or Array");
+
+  opts = Object.assign({}, opts);
+
+  if (!db) {
+    db = require(opts.file || "./oui.json");
+  }
+
+  inputs = Array.isArray(inputs) ? inputs : [inputs];
+
+  const mm = require("minimatch");
+  const results = [];
+  Object.keys(db).forEach(function(oui) {
+    const organization = db[oui];
+    if (inputs.every(pattern => mm(organization, pattern))) {
+      results.push({oui, organization});
+    }
+  });
+  return results;
+};
 
 oui.update = function(opts) {
   return new Promise(function(resolve, reject) {
@@ -54,3 +71,9 @@ oui.update = function(opts) {
     }).catch(reject);
   });
 };
+
+// Zero-pad colon notation as seen in BSD `arp`. eg. 1:2:3 should become 01:02:03
+function zeroPad(str) {
+  if (!/^[0-9A-F:]+$/.test(str)) return str;
+  return str.split(":").map(part => part.length === 1 ? "0" + part : part).join(":");
+}

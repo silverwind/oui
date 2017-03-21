@@ -25,6 +25,8 @@ function parseArgs(arg) {
       process.stdout.write(err + "\n");
       process.exit(1);
     });
+  } else if (arg === "--search") {
+    search(process.argv.slice(3));
   } else if (!arg || arg === "--help") {
     process.stdout.write([
       "",
@@ -32,15 +34,17 @@ function parseArgs(arg) {
       "",
       "  Options:",
       "",
-      "    --help           display this help text",
-      "    --update [url]   update the database with optional source URL",
-      "    --version        print the version",
+      "    --help              display this help text",
+      "    --update [url]      update the database with optional source URL",
+      "    --search [pattern]  search vendors using one or more '*search*' patterns",
+      "    --version           print the version",
       "",
       "  Examples:",
       "    oui 20:37:06:12:34:56",
       "    oui 203706",
       "    echo 20:37:06:12:34:56 | oui",
       "    echo 203706 | oui",
+      "    oui --search '*Cisco*Theory*'",
       "    oui --update",
     ].join("\n"));
     process.exit(0);
@@ -65,5 +69,23 @@ function lookup(str) {
   else
     process.stdout.write(str + " not found in database\n");
 
+  process.exit(0);
+}
+
+function search(patterns) {
+  const results = require(".").search(patterns);
+  const keys = Object.keys(results);
+  let structured = [];
+
+  if (!keys.length) {
+    return process.exit(1);
+  }
+
+  keys.forEach(function(oui) {
+    const [organzation, address, country] = results[oui].split("\n");
+    structured.push({oui, organzation, address, country});
+  });
+
+  process.stdout.write(require("columnify")(structured, {columnSplitter: "    "}) + "\n");
   process.exit(0);
 }
