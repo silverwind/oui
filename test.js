@@ -5,7 +5,9 @@ const oui = require(".");
 
 assert.ok(/cisco/i.test(oui("203706")));
 assert.ok(/cisco/i.test(oui("20:37:06")));
+assert.ok(/cisco/i.test(oui("20:37:6")));
 assert.ok(/cisco/i.test(oui("20:37:06:11:22:33")));
+assert.ok(/cisco/i.test(oui("20:37:6:11:22:33")));
 
 assert.equal(oui("20370"), null);
 

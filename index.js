@@ -32,12 +32,18 @@ var oui = module.exports = function oui(input, opts) {
 
     input = input.replace(/[.:-]/g, "").substring(0, 6);
   } else {
-    input = input.replace(/[^0-9a-fA-F]/g, "").substring(0, 6);
+    input = zeroPad(input).replace(/[^0-9a-fA-F]/g, "").substring(0, 6);
   }
 
   if (input.length < 6) return null;
   return db[input] || null;
 };
+
+// Zero-pad colon notation as seen in BSD `arp`. eg. 1:2:3 should become 01:02:03
+function zeroPad(str) {
+  if (!/^[0-9A-F:]+$/.test(str)) return str;
+  return str.split(":").map(part => part.length === 1 ? "0" + part : part).join(":");
+}
 
 oui.update = function(opts) {
   return new Promise(function(resolve, reject) {
