@@ -46,7 +46,7 @@ function parseArgs(arg) {
       "    echo 203706 | oui",
       "    oui --search '*Cisco*Theory*'",
       "    oui --update",
-    ].join("\n"));
+    ].join("\n") + "\n");
     process.exit(0);
   } else if (arg === "-v" || arg === "-V" || arg === "--version") {
     process.stdout.write(require("./package.json").version + "\n");
