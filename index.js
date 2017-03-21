@@ -55,7 +55,7 @@ oui.search = function(inputs, opts) {
   const results = [];
   Object.keys(db).forEach(function(oui) {
     const organization = db[oui];
-    if (inputs.every(pattern => mm(organization, pattern))) {
+    if (inputs.every(pattern => mm(organization, pattern, opts))) {
       results.push({oui, organization});
     }
   });

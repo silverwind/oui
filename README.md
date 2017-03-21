@@ -83,6 +83,7 @@ Returns: A Promise that indicates when the internal database has been updated. R
 - `patterns` *string/Array*: One or more wildcard patterns to search the vendor data, as suppored by [minimatch](https://github.com/isaacs/minimatch).
 - `options` *Object*: A optional options object.
   - `file` *String*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to. Defaults to the `oui.json` in the module directory.
+  - All [minimatch options](https://github.com/isaacs/minimatch#options) are supported as well.
 
 Returns a array of objects in the format {oui, organization}.
 <a name="strictformats" />
