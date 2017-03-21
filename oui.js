@@ -46,7 +46,7 @@ function parseArgs(arg) {
       "    echo 203706 | oui",
       "    oui --search '*Cisco*Theory*'",
       "    oui --update",
-    ].join("\n") + "\n");
+    ].join("\n") + "\n\n");
     process.exit(0);
   } else if (arg === "-v" || arg === "-V" || arg === "--version") {
     process.stdout.write(require("./package.json").version + "\n");
@@ -74,15 +74,15 @@ function lookup(str) {
 
 function search(patterns) {
   const results = require(".").search(patterns);
-  const keys = Object.keys(results);
-  let structured = [];
 
-  if (!keys.length) {
+  if (!results.length) {
     return process.exit(1);
   }
 
-  keys.forEach(function(oui) {
-    const [organzation, address, country] = results[oui].split("\n");
+  let structured = [];
+  results.forEach(function(result) {
+    const oui = result.oui;
+    const [organzation, address, country] = result.organization.split("\n");
     structured.push({oui, organzation, address, country});
   });
 
