@@ -51,7 +51,8 @@ function parseArgs(arg) {
     ].join("\n") + "\n\n");
     process.exit(0);
   } else if (arg === "-v" || arg === "-V" || arg === "--version") {
-    process.stdout.write(require("./package.json").version + "\n");
+    var pkg = require("path").join(__dirname, "package.json");
+    process.stdout.write(require(pkg).version + "\n");
   } else {
     lookup(arg);
   }
