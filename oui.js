@@ -26,7 +26,9 @@ function parseArgs(arg) {
       process.exit(1);
     });
   } else if (arg === "--search") {
-    search(process.argv.slice(3));
+    search(process.argv.slice(3).map(function(pattern) {
+      return "*" + pattern + "*";
+    }));
   } else if (!arg || arg === "--help") {
     process.stdout.write([
       "",
@@ -36,7 +38,7 @@ function parseArgs(arg) {
       "",
       "    --help              display this help text",
       "    --update [url]      update the database with optional source URL",
-      "    --search [pattern]  search vendors using one or more '*search*' patterns",
+      "    --search [patterns] search vendors using one or more search patterns",
       "    --version           print the version",
       "",
       "  Examples:",
@@ -44,7 +46,7 @@ function parseArgs(arg) {
       "    oui 203706",
       "    echo 20:37:06:12:34:56 | oui",
       "    echo 203706 | oui",
-      "    oui --search '*Cisco*Theory*'",
+      "    oui --search cisco theory",
       "    oui --update",
     ].join("\n") + "\n\n");
     process.exit(0);
@@ -73,7 +75,7 @@ function lookup(str) {
 }
 
 function search(patterns) {
-  const results = require(".").search(patterns);
+  const results = require(".").search(patterns, {nocase: true});
 
   if (!results.length) {
     return process.exit(1);

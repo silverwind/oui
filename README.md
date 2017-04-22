@@ -29,8 +29,7 @@ console.log(oui.search('*Juniper Systems*'))
 ```console
 $ npm install -g oui
 ```
-## Example (CLI)
-Either provide the lookup digits as an argument or on stdin:
+## Examples (CLI)
 ```console
 $ oui 20:37:06:12:34:56
 Cisco Systems, Inc
@@ -46,7 +45,7 @@ San Jose CA 94568
 United States
 ```
 ```console
-$ oui --search '*Cisco*Theory*'
+$ oui --search cisco theory
 OUI       ORGANZATION          ADDRESS             COUNTRY
 000C41    Cisco-Linksys LLC    121 Theory Dr.      Irvine CA 92612
 000F66    Cisco-Linksys LLC    121 Theory Dr.      Irvine CA 92612
