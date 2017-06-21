@@ -36,10 +36,8 @@ module.exports = function update(opts) {
           fs.writeFile(opts.file, str, noop);
         } else {
           fs.writeFile(opts.file, str, function(err) {
-            if (err)
-              reject(err);
-            else
-              resolve(result);
+            if (err) reject(err);
+            else resolve(result);
           });
         }
       });
@@ -54,11 +52,11 @@ function isStart(firstLine, secondLine) {
 
 function parse(lines, cb) {
   const result = {};
-  var i = 3;
+  let i = 3;
   while (i !== lines.length) {
     if (isStart(lines[i], lines[i + 1])) {
-      var oui   = lines[i + 2].substring(0, 6).trim();
-      var owner = lines[i + 1].replace(/\((hex|base 16)\)/, "").substring(10).trim();
+      let oui   = lines[i + 2].substring(0, 6).trim();
+      let owner = lines[i + 1].replace(/\((hex|base 16)\)/, "").substring(10).trim();
 
       i += 3;
       while (!isStart(lines[i], lines[i + 1]) && i < lines.length) {

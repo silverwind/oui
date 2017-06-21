@@ -1,6 +1,6 @@
 "use strict";
 
-var db;
+let db;
 const strictFormats = [
   /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i,
   /^([0-9A-F]{2}[:-]){2}([0-9A-F]{2})$/i,
@@ -9,9 +9,10 @@ const strictFormats = [
   /^[0-9A-F]{12}$/i
 ];
 
-var oui = module.exports = function oui(input, opts) {
-  if (typeof input !== "string")
+const oui = module.exports = function oui(input, opts) {
+  if (typeof input !== "string") {
     throw new Error("Input not a string");
+  }
 
   opts = Object.assign({}, opts);
 
@@ -40,8 +41,9 @@ var oui = module.exports = function oui(input, opts) {
 };
 
 oui.search = function(inputs, opts) {
-  if (typeof inputs !== "string" && !Array.isArray(inputs))
+  if (typeof inputs !== "string" && !Array.isArray(inputs)) {
     throw new Error("Input not a string or Array");
+  }
 
   opts = Object.assign({}, opts);
 

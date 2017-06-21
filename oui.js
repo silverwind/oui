@@ -5,10 +5,11 @@ process.title = "oui";
 
 require("get-stdin")().then(function(str) {
   str = str.trim();
-  if (str)
+  if (str) {
     lookup(str);
-  else
+  } else {
     parseArgs(process.argv[2]);
+  }
 });
 
 function parseArgs(arg) {
@@ -51,7 +52,7 @@ function parseArgs(arg) {
     ].join("\n") + "\n\n");
     process.exit(0);
   } else if (arg === "-v" || arg === "-V" || arg === "--version") {
-    var pkg = require("path").join(__dirname, "package.json");
+    const pkg = require("path").join(__dirname, "package.json");
     process.stdout.write(require(pkg).version + "\n");
   } else {
     lookup(arg);
@@ -59,7 +60,7 @@ function parseArgs(arg) {
 }
 
 function lookup(str) {
-  var result;
+  let result;
   try {
     result = require(".")(str);
   } catch (err) {
@@ -67,10 +68,11 @@ function lookup(str) {
     process.exit(1);
   }
 
-  if (result)
+  if (result) {
     process.stdout.write(result + "\n");
-  else
+  } else {
     process.stdout.write(str + " not found in database\n");
+  }
 
   process.exit(0);
 }
@@ -82,7 +84,7 @@ function search(patterns) {
     return process.exit(1);
   }
 
-  let structured = [];
+  const structured = [];
   results.forEach(function(result) {
     const oui = result.oui;
     const [organzation, address, country] = result.organization.split("\n");
