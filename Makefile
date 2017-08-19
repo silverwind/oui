@@ -32,8 +32,8 @@ update-data:
 patch:
 	$(MAKE) update-data
 	$(MAKE) test
-	cat $(WEBMIN) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i patch $(VERSION))/" > $(WEBMIN)
-	cat $(WEB) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i patch $(VERSION))/" > $(WEB)
+	cat $(WEBMIN) | sed -E "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i patch $(VERSION))/" > $(WEBMIN)
+	cat $(WEB) | sed -E "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i patch $(VERSION))/" > $(WEB)
 	$(MAKE) min
 	npm version -f patch
 	$(MAKE) publish
@@ -41,17 +41,16 @@ patch:
 minor:
 	$(MAKE) update-data
 	$(MAKE) test
-	cat $(WEBMIN) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i minor $(VERSION))/" > $(WEBMIN)
-	cat $(WEB) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i minor $(VERSION))/" > $(WEB)
-	$(MAKE) min
+	cat $(WEBMIN) | sed -E "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i minor $(VERSION))/" > $(WEBMIN)
+	cat $(WEB) | sed -E "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i minor $(VERSION))/" > $(WEB)
 	npm version -f minor
 	$(MAKE) publish
 
 major:
 	$(MAKE) update-data
 	$(MAKE) test
-	cat $(WEBMIN) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i major $(VERSION))/" > $(WEBMIN)
-	cat $(WEB) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i major $(VERSION))/" > $(WEB)
+	cat $(WEBMIN) | sed -E "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i major $(VERSION))/" > $(WEBMIN)
+	cat $(WEB) | sed -E "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i major $(VERSION))/" > $(WEB)
 	$(MAKE) min
 	npm version -f major
 	$(MAKE) publish
