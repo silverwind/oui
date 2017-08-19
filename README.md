@@ -25,6 +25,8 @@ console.log(oui.search('*Juniper Systems*'))
 //=> ]
 ```
 
+There's also a browser version available as `oui.web.js` or `oui.web.min.js` which uses a reduced dataset that only contains the vendor name.
+
 ## Installation (CLI)
 ```console
 $ npm install -g oui

@@ -7,6 +7,10 @@ UGLIFY := node_modules/.bin/uglifyjs
 NCU := node_modules/.bin/ncu
 SEMVER := node_modules/.bin/semver
 
+PATCH := $(shell $(SEMVER) -i patch $(VERSION))
+MINOR := $(shell $(SEMVER) -i minor $(VERSION))
+MAJOR := $(shell $(SEMVER) -i major $(VERSION))
+
 lint:
 	eslint --color --quiet --ignore-pattern *.min.js *.js
 
@@ -32,27 +36,34 @@ update-data:
 patch:
 	$(MAKE) update-data
 	$(MAKE) test
-	sed -Ei "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i patch $(VERSION))/" $(WEBMIN)
-	sed -Ei "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i patch $(VERSION))/" $(WEB)
+	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(PATCH)/" $(WEBMIN)
+	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(PATCH)/" $(WEB)
+	jq ". | .version = \"$(PATCH)\"" package.json | sponge package.json
 	$(MAKE) min
-	npm version -f patch
+	git commit -am "$(PATCH)"
+	git tag -a "$(PATCH)" -m "$(PATCH)"
 	$(MAKE) publish
 
 minor:
 	$(MAKE) update-data
 	$(MAKE) test
-	sed -Ei "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i minor $(VERSION))/" $(WEBMIN)
-	sed -Ei "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i minor $(VERSION))/" $(WEB)
-	npm version -f minor
+	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(MINOR)/" $(WEBMIN)
+	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(MINOR)/" $(WEB)
+	jq ". | .version = \"$(MINOR)\"" package.json | sponge package.json
+	$(MAKE) min
+	git commit -am "$(MINOR)"
+	git tag -a "$(MINOR)" -m "$(MINOR)"
 	$(MAKE) publish
 
 major:
 	$(MAKE) update-data
 	$(MAKE) test
-	sed -Ei "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i major $(VERSION))/" $(WEBMIN)
-	sed -Ei "s/ v[0-9]+\.[0-9]+\.[0-9]+/ v$$($(SEMVER) -i major $(VERSION))/" $(WEB)
+	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(MAJOR)/" $(WEBMIN)
+	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(MAJOR)/" $(WEB)
+	jq ". | .version = \"$(MAJOR)\"" package.json | sponge package.json
 	$(MAKE) min
-	npm version -f major
+	git commit -am "$(MAJOR)"
+	git tag -a "$(MAJOR)" -m "$(MAJOR)"
 	$(MAKE) publish
 
 .PHONY: lint test min publish update update-data patch minor major
