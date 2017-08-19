@@ -31,7 +31,8 @@
     "index.js",
     "oui.js",
     "update.js",
-    "oui.json"
+    "oui.json",
+    "oui.web.min.js"
   ],
   "dependencies": {
     "char-spinner": "^1.0.1",
