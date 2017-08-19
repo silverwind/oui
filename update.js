@@ -47,7 +47,7 @@ module.exports = function update(opts) {
         const web = path.join(__dirname, "oui.web.js");
         fs.readFile(web, "utf8", function(err, js) {
           if (err) return reject(err);
-          js = js.replace(/const db =.+/, "const db = " + stringify(resultShort) + ";");
+          js = js.replace(/var db =.+/, "var db = " + stringify(resultShort) + ";");
           fs.writeFile(web, js, function(err) {
             if (err) return reject(err);
             resolve(result);
