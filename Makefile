@@ -43,7 +43,6 @@ minor:
 	$(MAKE) test
 	cat $(WEBMIN) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i minor $(VERSION))/" > $(WEBMIN)
 	cat $(WEB) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i minor $(VERSION))/" > $(WEB)
-	git diff --exit-code &>/dev/null || git commit -am "bump version"
 	$(MAKE) min
 	npm version -f minor
 	$(MAKE) publish
@@ -53,7 +52,6 @@ major:
 	$(MAKE) test
 	cat $(WEBMIN) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i major $(VERSION))/" > $(WEBMIN)
 	cat $(WEB) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i major $(VERSION))/" > $(WEB)
-	git diff --exit-code &>/dev/null || git commit -am "bump version"
 	$(MAKE) min
 	npm version -f major
 	$(MAKE) publish
