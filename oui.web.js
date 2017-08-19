@@ -1,4 +1,5 @@
 /*! oui web v6.3.16 | (c) silverwind | BSD license */
+/* eslint-disable no-var */
 (function(m) {
   if (typeof exports === "object" && typeof module === "object") {
     module.exports = m();
@@ -24,7 +25,7 @@
   function zeroPad(str) {
     if (!/^[0-9A-F:]+$/.test(str)) return str;
     return str.split(":").map(function(part) {
-      return part.length === 1 ? "0" + part : part
+      return part.length === 1 ? "0" + part : part;
     }).join(":");
   }
 

@@ -1,13 +1,14 @@
 VERSION := $(shell jq -r .version < package.json)
 WEB := oui.web.js
-WEBMIN := out.web.min.js
+WEBMIN := oui.web.min.js
 NODE := node --trace-deprecation --throw-deprecation
+ESLINT := node_modules/.bin/eslint
 UGLIFY := node_modules/.bin/uglifyjs
 NCU := node_modules/.bin/ncu
 SEMVER := node_modules/.bin/semver
 
 lint:
-	eslint *.js
+	eslint --color --quiet --ignore-pattern *.min.js *.js
 
 test:
 	$(MAKE) lint

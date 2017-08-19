@@ -33,7 +33,7 @@ function parseArgs() {
       process.exit(1);
     });
   } else if (args._[0] === "search" || args.search) {
-    var params = args.search ? args._ : args._.slice(1);
+    const params = args.search ? args._ : args._.slice(1);
     search(params.map(function(pattern) {
       return "*" + pattern + "*";
     }));
