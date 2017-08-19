@@ -8,15 +8,21 @@ require("get-stdin")().then(function(str) {
   if (str) {
     lookup(str);
   } else {
-    parseArgs(process.argv[2]);
+    parseArgs();
   }
 });
 
-function parseArgs(arg) {
-  if (arg === "--update") {
+function parseArgs() {
+  const args = require("minimist")(process.argv.slice(2), {
+    boolean: true,
+    string: ["_"],
+  });
+
+  if (args._[0] === "update" || args.update) {
     const interval = require("char-spinner")();
-    const opts = {cli: true};
-    if (process.argv[3]) opts.url = process.argv[3];
+    const opts = {};
+    if (args._[1]) opts.url = args._[1];
+    if (args.w) opts.web = true;
 
     require("./update.js")(opts).then(function() {
       clearInterval(interval);
@@ -26,36 +32,37 @@ function parseArgs(arg) {
       process.stdout.write(err + "\n");
       process.exit(1);
     });
-  } else if (arg === "--search") {
-    search(process.argv.slice(3).map(function(pattern) {
+  } else if (args._[0] === "search" || args.search) {
+    var params = args.search ? args._ : args._.slice(1);
+    search(params.map(function(pattern) {
       return "*" + pattern + "*";
     }));
-  } else if (!arg || arg === "--help") {
+  } else if (!args._.length || args._[0] === "help" || args.help) {
     process.stdout.write([
       "",
-      "  Usage: oui [mac]|[options]",
+      "  Usage: oui [mac]|[command] [options]",
       "",
-      "  Options:",
-      "",
-      "    --help              display this help text",
-      "    --update [url]      update the database with optional source URL",
-      "    --search [patterns] search vendors using one or more search patterns",
-      "    --version           print the version",
+      "  Commands:",
+      "    [mac]                look up a MAC address in the database",
+      "    search [patterns]    search vendors using one or more search patterns",
+      "    version              print the version",
+      "    update [url] [-w]    update the database with optional source URL. If -w",
+      "                         is given, oui.web.js will also be updated.",
       "",
       "  Examples:",
       "    oui 20:37:06:12:34:56",
       "    oui 203706",
+      "    oui update",
+      "    oui search cisco theory",
       "    echo 20:37:06:12:34:56 | oui",
       "    echo 203706 | oui",
-      "    oui --search cisco theory",
-      "    oui --update",
     ].join("\n") + "\n\n");
     process.exit(0);
-  } else if (arg === "-v" || arg === "-V" || arg === "--version") {
+  } else if (args._[0] === "version" || args.v || args.V || args.version) {
     const pkg = require("path").join(__dirname, "package.json");
     process.stdout.write(require(pkg).version + "\n");
   } else {
-    lookup(arg);
+    lookup(args._[0]);
   }
 }
 

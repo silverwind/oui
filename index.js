@@ -22,7 +22,7 @@ const oui = module.exports = function oui(input, opts) {
 
   input = input.toUpperCase();
 
-  if (opts.strict === true) {
+  if (opts.strict) {
     const isStrict = strictFormats.some(function(regex) {
       if (regex.test(input)) return true;
     });

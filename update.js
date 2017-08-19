@@ -7,7 +7,12 @@ const stringify = require("json-stable-stringify");
 const path      = require("path");
 const countries = require("country-data").countries;
 const url       = require("url");
-const noop      = function() {};
+
+const stringifyOpts = {
+  space: 1, cmp: function(a, b) {
+    return parseInt(a.key, 16) > parseInt(b.key, 16) ? 1 : -1;
+  },
+};
 
 module.exports = function update(opts) {
   return new Promise(function(resolve, reject) {
@@ -21,27 +26,35 @@ module.exports = function update(opts) {
       return reject(new Error("Invalid source URL '" + opts.url + "'"));
     }
 
-    got(opts.url).catch(reject).then(function(res) {
-      parse(res.body.split("\n"), function(result) {
-        const str = stringify(result, {space: 1, cmp: function(a, b) {
-          return parseInt(a.key, 16) > parseInt(b.key, 16) ? 1 : -1;
-        }});
+    got(opts.url).then(function(res) {
+      return parse(res.body.split("\n"));
+    }).then(function(result) {
+      if (opts.test) {
+        return resolve(result);
+      }
 
-        if (opts.test) {
-          return resolve(result);
-        }
+      // save oui.js
+      fs.writeFile(opts.file, stringify(result, stringifyOpts), function(err) {
+        if (err) return reject(err);
+        if (!opts.web) return resolve(result);
 
-        if (!opts.cli) {
-          resolve(result);
-          fs.writeFile(opts.file, str, noop);
-        } else {
-          fs.writeFile(opts.file, str, function(err) {
-            if (err) reject(err);
-            else resolve(result);
+        // update oui.web.js
+        const resultShort = {};
+        Object.keys(result).map(function(key) {
+          resultShort[key] = result[key].match(/^.*$/m)[0];
+        });
+
+        const web = path.join(__dirname, "oui.web.js");
+        fs.readFile(web, "utf8", function(err, js) {
+          if (err) return reject(err);
+          js = js.replace(/const db =.+/, "const db = " + stringify(resultShort) + ";");
+          fs.writeFile(web, js, function(err) {
+            if (err) return reject(err);
+            resolve(result);
           });
-        }
+        });
       });
-    }).catch(reject);
+    });
   });
 };
 
@@ -50,7 +63,7 @@ function isStart(firstLine, secondLine) {
   return firstLine.trim().length === 0 && /([0-9A-F]{2}[-]){2}([0-9A-F]{2})/.test(secondLine);
 }
 
-function parse(lines, cb) {
+function parse(lines) {
   const result = {};
   let i = 3;
   while (i !== lines.length) {
@@ -79,5 +92,5 @@ function parse(lines, cb) {
       result[oui] = owner;
     }
   }
-  if (cb) cb(result);
+  return result;
 }

@@ -5,8 +5,10 @@
   "description": "Look up MAC addresses for their vendor in the IEEE OUI database",
   "repository": "silverwind/oui",
   "license": "BSD-2-Clause",
+  "main": "index.js",
+  "browser": "oui.web.min.js",
   "scripts": {
-    "test": "node --trace-deprecation --throw-deprecation test.js"
+    "test": "make test"
   },
   "keywords": [
     "mac",
@@ -38,6 +40,12 @@
     "get-stdin": "^5.0.1",
     "got": "^6.7.1",
     "json-stable-stringify": "^1.0.1",
-    "minimatch": "^3.0.3"
+    "minimatch": "^3.0.3",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "npm-check-updates": "^2.12.1",
+    "semver": "^5.4.1",
+    "uglify-js": "^3.0.27"
   }
 }
