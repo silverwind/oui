@@ -31,7 +31,6 @@ update-data:
 
 patch:
 	$(MAKE) update-data
-	$(MAKE) lint
 	$(MAKE) test
 	cat $(WEBMIN) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i patch $(VERSION))/" > $(WEBMIN)
 	cat $(WEB) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i patch $(VERSION))/" > $(WEB)
@@ -41,7 +40,6 @@ patch:
 
 minor:
 	$(MAKE) update-data
-	$(MAKE) lint
 	$(MAKE) test
 	cat $(WEBMIN) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i minor $(VERSION))/" > $(WEBMIN)
 	cat $(WEB) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i minor $(VERSION))/" > $(WEB)
@@ -52,7 +50,6 @@ minor:
 
 major:
 	$(MAKE) update-data
-	$(MAKE) lint
 	$(MAKE) test
 	cat $(WEBMIN) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i major $(VERSION))/" > $(WEBMIN)
 	cat $(WEB) | sed -E "s/v[0-9\.]+/v$$($(SEMVER) -i major $(VERSION))/" > $(WEB)
