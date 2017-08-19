@@ -30,6 +30,10 @@
   }
 
   return function oui(input, opts) {
+    if (typeof input !== "string") {
+      throw new Error("Input not a string");
+    }
+
     opts = Object.assign({}, opts);
     input = input.toUpperCase();
 
