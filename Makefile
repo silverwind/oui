@@ -12,7 +12,7 @@ MINOR := $(shell $(SEMVER) -i minor $(VERSION))
 MAJOR := $(shell $(SEMVER) -i major $(VERSION))
 
 lint:
-	eslint --color --quiet --ignore-pattern *.min.js *.js
+	eslint --color --quiet index.js update.js test.js
 
 test:
 	$(MAKE) lint
