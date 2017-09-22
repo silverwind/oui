@@ -76,14 +76,14 @@ Returns: Either a string, or `null` if no matches are found. Throws if input is 
 ### oui.update([options])
 - `options` *Object*: A optional options object.
   - `url` *string*: The URL from where to retrieve `oui.txt`. Defaults to `'http://linuxnet.ca/ieee/oui.txt'`. To use the more inconsistent and slower to download original file from IEEE, use `'http://standards.ieee.org/develop/regauth/oui/oui.txt'`.
-  - `file` *string*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to. Defaults to the `oui.json` in the module directory.
+  - `file` *string*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to the `oui.json` in the module directory.
 
 Returns: A Promise that indicates when the internal database has been updated. Rejects on error.
 
 ### oui.search(patterns [, options])
 - `patterns` *string/Array*: One or more wildcard patterns to search the vendor data, as suppored by [minimatch](https://github.com/isaacs/minimatch).
 - `options` *Object*: A optional options object.
-  - `file` *String*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to. Defaults to the `oui.json` in the module directory.
+  - `file` *String*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to the `oui.json` in the module directory.
   - All [minimatch options](https://github.com/isaacs/minimatch#options) are supported as well.
 
 Returns a array of objects in the format {oui, organization}.
