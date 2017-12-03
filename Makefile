@@ -2,9 +2,6 @@ VERSION := $(shell jq -r .version < package.json)
 WEB := oui.web.js
 WEBMIN := oui.web.min.js
 NODE := node --trace-deprecation --throw-deprecation
-ESLINT := node_modules/.bin/eslint
-UGLIFY := node_modules/.bin/uglifyjs
-NCU := node_modules/.bin/ncu
 SEMVER := node_modules/.bin/semver
 
 PATCH := $(shell $(SEMVER) -i patch $(VERSION))
@@ -12,21 +9,21 @@ MINOR := $(shell $(SEMVER) -i minor $(VERSION))
 MAJOR := $(shell $(SEMVER) -i major $(VERSION))
 
 lint:
-	$(ESLINT) --color --quiet index.js update.js test.js
+	node_modules/.bin/eslint --color --quiet index.js update.js test.js
 
 test:
 	$(MAKE) lint
 	$(NODE) test.js
 
 min:
-	$(UGLIFY) $(WEB) -o $(WEBMIN) --mangle --compress --screw-ie8 --unsafe --comments '/oui/'
+	node_modules/.bin/uglifyjs $(WEB) -o $(WEBMIN) --mangle --compress --screw-ie8 --unsafe --comments '/oui/'
 
 publish:
 	git push -u --tags origin master
 	npm publish
 
 update:
-	$(NCU) --packageFile package.json -ua
+	node_modules/.bin/updates -u
 	rm -rf node_modules
 	yarn
 
