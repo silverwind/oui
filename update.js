@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 "use strict";
 
-const fs        = require("fs");
-const got       = require("got");
-const stringify = require("json-stable-stringify");
-const path      = require("path");
+const fs = require("fs");
+const path = require("path");
+const url = require("url");
+
 const countries = require("country-data").countries;
-const url       = require("url");
+const request = require("request-promise-native");
+const stringify = require("json-stable-stringify");
 
 const stringifyOpts = {
   space: 1, cmp: function(a, b) {
@@ -26,8 +27,8 @@ module.exports = function update(opts) {
       return reject(new Error("Invalid source URL '" + opts.url + "'"));
     }
 
-    got(opts.url).then(function(res) {
-      return parse(res.body.split("\n"));
+    request(opts.url).then(function(body) {
+      return parse(body.split("\n"));
     }).then(function(result) {
       if (opts.test) {
         return resolve(result);
