@@ -27,11 +27,7 @@ update:
 	rm -rf node_modules
 	yarn
 
-update-data:
-	$(NODE) oui.js update -w
-
 patch:
-	$(MAKE) update-data
 	$(MAKE) test
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(PATCH)/" $(WEBMIN)
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(PATCH)/" $(WEB)
@@ -42,7 +38,6 @@ patch:
 	$(MAKE) publish
 
 minor:
-	$(MAKE) update-data
 	$(MAKE) test
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(MINOR)/" $(WEBMIN)
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(MINOR)/" $(WEB)
@@ -53,7 +48,6 @@ minor:
 	$(MAKE) publish
 
 major:
-	$(MAKE) update-data
 	$(MAKE) test
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(MAJOR)/" $(WEBMIN)
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(MAJOR)/" $(WEB)
@@ -63,4 +57,4 @@ major:
 	git tag -a "$(MAJOR)" -m "$(MAJOR)"
 	$(MAKE) publish
 
-.PHONY: lint test min publish update update-data patch minor major
+.PHONY: lint test min publish update patch minor major
