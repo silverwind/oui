@@ -32,7 +32,7 @@ patch:
 
 minor:
 	$(MAKE) test
-	$(eval VER := $(shell $(BIN)/semver -i patch $(VERSION)))
+	$(eval VER := $(shell $(BIN)/semver -i minor $(VERSION)))
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(VER)/" $(WEBMIN)
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(VER)/" $(WEB)
 	jq ". | .version = \"$(VER)\"" package.json | sponge package.json
@@ -43,7 +43,7 @@ minor:
 
 major:
 	$(MAKE) test
-	$(eval VER := $(shell $(BIN)/semver -i patch $(VERSION)))
+	$(eval VER := $(shell $(BIN)/semver -i major $(VERSION)))
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(VER)/" $(WEBMIN)
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(VER)/" $(WEB)
 	jq ". | .version = \"$(VER)\"" package.json | sponge package.json
