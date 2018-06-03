@@ -46,9 +46,10 @@
     "request-promise-native": "^1.0.5"
   },
   "devDependencies": {
-    "eslint": "^4.16.0",
+    "eslint": "^4.19.1",
+    "eslint-config-silverwind": "^1.0.42",
     "semver": "^5.5.0",
     "uglify-js": "^3.3.8",
-    "updates": "^2.1.0"
+    "updates": "^3.0.0"
   }
 }

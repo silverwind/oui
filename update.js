@@ -16,7 +16,7 @@ const stringifyOpts = {
 };
 
 module.exports = function update(opts) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     opts = Object.assign({
       url: "http://linuxnet.ca/ieee/oui.txt",
       file: path.join(__dirname, "oui.json"),
@@ -27,29 +27,27 @@ module.exports = function update(opts) {
       return reject(new Error("Invalid source URL '" + opts.url + "'"));
     }
 
-    request(opts.url).then(function(body) {
-      return parse(body.split("\n"));
-    }).then(function(result) {
+    request(opts.url).then(body => parse(body.split("\n"))).then(result => {
       if (opts.test) {
         return resolve(result);
       }
 
       // save oui.js
-      fs.writeFile(opts.file, stringify(result, stringifyOpts), function(err) {
+      fs.writeFile(opts.file, stringify(result, stringifyOpts), err => {
         if (err) return reject(err);
         if (!opts.web) return resolve(result);
 
         // update oui.web.js
         const resultShort = {};
-        Object.keys(result).map(function(key) {
+        Object.keys(result).map(key => {
           resultShort[key] = result[key].match(/^.*$/m)[0];
         });
 
         const web = path.join(__dirname, "oui.web.js");
-        fs.readFile(web, "utf8", function(err, js) {
+        fs.readFile(web, "utf8", (err, js) => {
           if (err) return reject(err);
           js = js.replace(/var db =.+/, "var db = " + stringify(resultShort) + ";");
-          fs.writeFile(web, js, function(err) {
+          fs.writeFile(web, js, err => {
             if (err) return reject(err);
             resolve(result);
           });

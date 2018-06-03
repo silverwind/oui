@@ -23,9 +23,7 @@ const oui = module.exports = function oui(input, opts) {
   input = input.toUpperCase();
 
   if (opts.strict) {
-    const isStrict = strictFormats.some(function(regex) {
-      if (regex.test(input)) return true;
-    });
+    const isStrict = strictFormats.some(regex => regex.test(input));
 
     if (!isStrict) {
       throw new Error("Input not in strict format");
@@ -55,7 +53,7 @@ oui.search = function(inputs, opts) {
 
   const mm = require("minimatch");
   const results = [];
-  Object.keys(db).forEach(function(oui) {
+  Object.keys(db).forEach(oui => {
     const organization = db[oui];
     if (inputs.every(pattern => mm(organization, pattern, opts))) {
       results.push({oui, organization});
@@ -65,9 +63,9 @@ oui.search = function(inputs, opts) {
 };
 
 oui.update = function(opts) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     opts = Object.assign({cli: false}, opts);
-    require("./update.js")(opts).then(function(newdb) {
+    require("./update.js")(opts).then(newdb => {
       db = newdb;
       resolve();
     }).catch(reject);

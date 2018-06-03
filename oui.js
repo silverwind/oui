@@ -3,7 +3,7 @@
 
 process.title = "oui";
 
-require("get-stdin")().then(function(str) {
+require("get-stdin")().then(str => {
   str = str.trim();
   if (str) {
     lookup(str);
@@ -24,17 +24,17 @@ function parseArgs() {
     if (args._[1]) opts.url = args._[1];
     if (args.w) opts.web = true;
 
-    require("./update.js")(opts).then(function() {
+    require("./update.js")(opts).then(() => {
       clearInterval(interval);
       process.exit(0);
-    }).catch(function(err) {
+    }).catch(err => {
       clearInterval(interval);
       process.stdout.write(err + "\n");
       process.exit(1);
     });
   } else if (args._[0] === "search" || args.search) {
     const params = args.search ? args._ : args._.slice(1);
-    search(params.map(function(pattern) {
+    search(params.map(pattern => {
       return "*" + pattern + "*";
     }));
   } else if (!args._.length || args._[0] === "help" || args.help) {
@@ -92,7 +92,7 @@ function search(patterns) {
   }
 
   const structured = [];
-  results.forEach(function(result) {
+  results.forEach(result => {
     const oui = result.oui;
     const [organzation, address, country] = result.organization.split("\n");
     structured.push({oui, organzation, address, country});
