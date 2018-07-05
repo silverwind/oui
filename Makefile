@@ -24,7 +24,7 @@ patch:
 	$(eval VER := $(shell $(BIN)/semver -i patch $(VERSION)))
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(VER)/" $(WEBMIN)
 	sed -Ei "s/v[0-9]+\.[0-9]+\.[0-9]+/v$(VER)/" $(WEB)
-	jq ". | .version = \"$(PATCH)\"" package.json | sponge package.json
+	jq ". | .version = \"$(VER)\"" package.json | sponge package.json
 	$(MAKE) min
 	git commit -am "$(VER)"
 	git tag -a "$(VER)" -m "$(VER)"
