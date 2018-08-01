@@ -1,21 +1,20 @@
 VERSION := $(shell jq -r .version < package.json)
 WEB := oui.web.js
 WEBMIN := oui.web.min.js
-BIN := node_modules/.bin
 
 test:
-	$(BIN)/eslint --color --quiet index.js update.js test.js
+	npx eslint --color --quiet index.js update.js test.js
 	node --trace-deprecation --throw-deprecation --trace-warnings test.js
 
 min:
-	$(BIN)/uglifyjs $(WEB) -o $(WEBMIN) --mangle --compress --unsafe --comments "/oui/"
+	npx uglifyjs $(WEB) -o $(WEBMIN) --mangle --compress --unsafe --comments "/oui/"
 
 publish:
 	git push -u --tags origin master
 	npm publish
 
 update:
-	$(BIN)/updates -u
+	npx updates -u
 	rm -rf node_modules
 	yarn
 
