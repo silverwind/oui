@@ -19,7 +19,7 @@ update:
 	yarn
 
 patch:
-	# $(MAKE) test
+	$(MAKE) test
 	$(eval VER := $(shell npx semver -i patch $(VERSION)))
 	sed -Ei "s#v[0-9]+\.[0-9]+\.[0-9]+#v$(VER)#" $(WEBMIN)
 	sed -Ei "s#v[0-9]+\.[0-9]+\.[0-9]+#v$(VER)#" $(WEB)
