@@ -10,7 +10,8 @@ const fetch = require("make-fetch-happen");
 const stringify = require("json-stable-stringify");
 
 const stringifyOpts = {
-  space: 1, cmp: function(a, b) {
+  space: 1,
+  cmp: (a, b) => {
     return parseInt(a.key, 16) > parseInt(b.key, 16) ? 1 : -1;
   },
 };
