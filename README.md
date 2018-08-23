@@ -83,7 +83,7 @@ Returns: Either a string, or `null` if no matches are found. Throws if input is 
 Returns: A Promise that indicates when the internal database has been updated. Rejects on error.
 
 ### oui.search(patterns [, options])
-- `patterns` *string/Array*: One or more wildcard patterns to search the vendor data, as suppored by [minimatch](https://github.com/isaacs/minimatch).
+- `patterns` *string/Array*: One or more wildcard patterns to search the vendor data, as supported by [minimatch](https://github.com/isaacs/minimatch).
 - `options` *Object*: A optional options object.
   - `file` *String*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to the `oui.json` in the module directory.
   - All [minimatch options](https://github.com/isaacs/minimatch#options) are supported as well.
