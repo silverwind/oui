@@ -6,7 +6,7 @@ const path = require("path");
 const url = require("url");
 
 const countries = require("country-data").countries;
-const request = require("request-promise-native");
+const fetch = require("make-fetch-happen");
 const stringify = require("json-stable-stringify");
 
 const stringifyOpts = {
@@ -27,7 +27,7 @@ module.exports = function update(opts) {
       return reject(new Error("Invalid source URL '" + opts.url + "'"));
     }
 
-    request(opts.url).then(body => parse(body.split("\n"))).then(result => {
+    fetch(opts.url).then(res => res.text()).then(body => parse(body.split("\n"))).then(result => {
       if (opts.test) {
         return resolve(result);
       }

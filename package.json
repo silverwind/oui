@@ -35,21 +35,20 @@
     "oui.web.min.js"
   ],
   "dependencies": {
-    "char-spinner": "^1.0.1",
-    "columnify": "^1.5.4",
+    "char-spinner": "1.0.1",
+    "columnify": "1.5.4",
     "country-data": "0.0.31",
-    "get-stdin": "^6.0.0",
-    "json-stable-stringify": "^1.0.1",
-    "minimatch": "^3.0.4",
-    "minimist": "^1.2.0",
-    "request": "^2.87.0",
-    "request-promise-native": "^1.0.5"
+    "get-stdin": "6.0.0",
+    "json-stable-stringify": "1.0.1",
+    "make-fetch-happen": "4.0.1",
+    "minimatch": "3.0.4",
+    "minimist": "1.2.0"
   },
   "devDependencies": {
-    "eslint": "^5.2.0",
-    "eslint-config-silverwind": "^1.0.45",
-    "semver": "^5.5.0",
-    "uglify-js": "^3.4.6",
-    "updates": "^4.1.2"
+    "eslint": "5.2.0",
+    "eslint-config-silverwind": "1.0.45",
+    "semver": "5.5.0",
+    "uglify-js": "3.4.6",
+    "updates": "4.1.2"
   }
 }
