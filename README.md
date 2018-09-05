@@ -55,7 +55,6 @@ OUI       ORGANZATION          ADDRESS             COUNTRY
 000F66    Cisco-Linksys LLC    121 Theory Dr.      Irvine CA 92612
 001217    Cisco-Linksys LLC    121 Theory Dr.      Irvine CA 92612
 001310    Cisco-Linksys LLC    121 Theory Dr.      Irvine CA 92612
-...
 ```
 To update the local OUI database:
 ```console
