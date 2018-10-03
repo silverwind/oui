@@ -98,6 +98,8 @@ function search(patterns) {
     structured.push({oui, organzation, address, country});
   });
 
-  process.stdout.write(require("columnify")(structured, {columnSplitter: "    "}) + "\n");
+  const arr = [Object.keys(structured[0]).map(name => name.toUpperCase())];
+  for (const entry of structured) arr.push(Object.values(entry).map(v => v || ""));
+  process.stdout.write(require("text-table")(arr, {hsep: "    "}) + "\n");
   process.exit(0);
 }

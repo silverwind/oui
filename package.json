@@ -36,16 +36,16 @@
   ],
   "dependencies": {
     "char-spinner": "1.0.1",
-    "columnify": "1.5.4",
     "country-data": "0.0.31",
     "get-stdin": "6.0.0",
     "json-stable-stringify": "1.0.1",
     "make-fetch-happen": "4.0.1",
     "minimatch": "3.0.4",
-    "minimist": "1.2.0"
+    "minimist": "1.2.0",
+    "text-table": "^0.2.0"
   },
   "devDependencies": {
-    "eslint": "5.5.0",
+    "eslint": "5.6.1",
     "eslint-config-silverwind": "2.0.9",
     "semver": "5.5.1",
     "uglify-js": "3.4.9",
