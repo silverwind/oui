@@ -1,6 +1,6 @@
 "use strict";
 
-let db;
+const dbs = {};
 const strictFormats = [
   /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i,
   /^([0-9A-F]{2}[:-]){2}([0-9A-F]{2})$/i,
@@ -16,9 +16,13 @@ const oui = module.exports = function oui(input, opts) {
 
   opts = Object.assign({}, opts);
 
-  if (!db) {
-    db = require(opts.file || "./oui.json");
+  const file = opts.file || "./oui.json";
+
+  if (!dbs[file]) {
+    dbs[file] = require(file);
   }
+
+  const db = dbs[file];
 
   input = input.toUpperCase();
 
@@ -45,9 +49,13 @@ oui.search = function(inputs, opts) {
 
   opts = Object.assign({}, opts);
 
-  if (!db) {
-    db = require(opts.file || "./oui.json");
+  const file = opts.file || "./oui.json";
+
+  if (!dbs[file]) {
+    dbs[file] = require(file);
   }
+
+  const db = dbs[file];
 
   inputs = Array.isArray(inputs) ? inputs : [inputs];
 
@@ -66,7 +74,7 @@ oui.update = function(opts) {
   return new Promise((resolve, reject) => {
     opts = Object.assign({cli: false}, opts);
     require("./update.js")(opts).then(newdb => {
-      db = newdb;
+      dbs["./oui.json"] = newdb;
       resolve();
     }).catch(reject);
   });
