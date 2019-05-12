@@ -25,7 +25,7 @@
     "oui": "oui.js"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "files": [
     "index.js",
