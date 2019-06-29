@@ -28,7 +28,13 @@ module.exports = function update(opts) {
       return reject(new Error("Invalid source URL '" + opts.url + "'"));
     }
 
-    fetch(opts.url).then(res => res.text()).then(body => parse(body.split("\n"))).then(result => {
+    fetch(opts.url).then(res => res.text()).then(body => {
+      if (!body || !body.length || !/^(OUI|[#]|[A-Za-z])/.exec(body)) {
+        throw new Error("Downloaded file does not look like a oui.txt file");
+      } else {
+        return parse(body.split("\n"));
+      }
+    }).then(result => {
       if (opts.test) {
         return resolve(result);
       }
@@ -54,7 +60,7 @@ module.exports = function update(opts) {
           });
         });
       });
-    });
+    }).catch(reject);
   });
 };
 
