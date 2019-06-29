@@ -29,7 +29,7 @@ module.exports = function update(opts) {
     }
 
     fetch(opts.url).then(res => res.text()).then(body => {
-      if (!body || !body.length || !/^(OUI|[#]|[A-Za-z])/.exec(body)) {
+      if (!body || !body.length || !/^(OUI|[#]|[A-Fa-f0-9])/.exec(body)) {
         if (opts.test) return resolve(); // ignore
         throw new Error("Downloaded file does not look like a oui.txt file");
       } else {
