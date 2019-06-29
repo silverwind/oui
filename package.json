@@ -45,10 +45,10 @@
     "text-table": "^0.2.0"
   },
   "devDependencies": {
-    "eslint": "5.16.0",
-    "eslint-config-silverwind": "3.0.0",
-    "semver": "6.0.0",
-    "uglify-js": "3.5.12",
-    "updates": "8.0.3"
+    "eslint": "6.0.1",
+    "eslint-config-silverwind": "4.0.2",
+    "semver": "6.1.2",
+    "uglify-js": "3.6.0",
+    "updates": "8.1.4"
   }
 }
