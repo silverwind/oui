@@ -30,14 +30,13 @@ module.exports = function update(opts) {
 
     fetch(opts.url).then(res => res.text()).then(body => {
       if (!body || !body.length || !/^(OUI|[#]|[A-Za-z])/.exec(body)) {
+        if (opts.test) return resolve(); // ignore
         throw new Error("Downloaded file does not look like a oui.txt file");
       } else {
         return parse(body.split("\n"));
       }
     }).then(result => {
-      if (opts.test) {
-        return resolve(result);
-      }
+      if (opts.test) return resolve(result);
 
       // save oui.js
       fs.writeFile(opts.file, stringify(result, stringifyOpts), err => {
