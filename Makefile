@@ -1,4 +1,3 @@
-VERSION := $(shell jq -r .version < package.json)
 WEB := oui.web.js
 WEBMIN := oui.web.min.js
 
@@ -7,48 +6,36 @@ test:
 	node --trace-deprecation --throw-deprecation --trace-warnings test.js
 
 min:
-	npx uglifyjs $(WEB) -o $(WEBMIN) --mangle --compress --unsafe --comments "/oui/"
+	npx terser $(WEB) -o $(WEBMIN) --mangle --compress --unsafe --comments "/oui/"
 
 publish:
 	git push -u --tags origin master
 	npm publish
 
-update:
-	npx updates -u
+deps:
 	rm -rf node_modules
 	npm i
 
+update:
+	npx updates -u
+	$(MAKE) deps
+
 patch:
 	$(MAKE) test
-	$(eval VER := $(shell npx semver -i patch $(VERSION)))
-	sed -Ei "s#v[0-9]+\.[0-9]+\.[0-9]+#v$(VER)#" $(WEBMIN)
-	sed -Ei "s#v[0-9]+\.[0-9]+\.[0-9]+#v$(VER)#" $(WEB)
-	sed -Ei 's#"version": "$(VERSION)"#"version": "$(VER)"#' package.json
 	$(MAKE) min
-	git commit -am "$(VER)"
-	git tag -a "$(VER)" -m "$(VER)"
+	npx ver patch $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
 minor:
 	$(MAKE) test
-	$(eval VER := $(shell npx semver -i minor $(VERSION)))
-	sed -Ei "s#v[0-9]+\.[0-9]+\.[0-9]+#v$(VER)#" $(WEBMIN)
-	sed -Ei "s#v[0-9]+\.[0-9]+\.[0-9]+#v$(VER)#" $(WEB)
-	sed -Ei 's#"version": "$(VERSION)"#"version": "$(VER)"#' package.json
 	$(MAKE) min
-	git commit -am "$(VER)"
-	git tag -a "$(VER)" -m "$(VER)"
+	npx ver minor $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
 major:
 	$(MAKE) test
-	$(eval VER := $(shell npx semver -i major $(VERSION)))
-	sed -Ei "s#v[0-9]+\.[0-9]+\.[0-9]+#v$(VER)#" $(WEBMIN)
-	sed -Ei "s#v[0-9]+\.[0-9]+\.[0-9]+#v$(VER)#" $(WEB)
-	sed -Ei 's#"version": "$(VERSION)"#"version": "$(VER)"#' package.json
 	$(MAKE) min
-	git commit -am "$(VER)"
-	git tag -a "$(VER)" -m "$(VER)"
+	npx ver major $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
 .PHONY: test min publish update patch minor major
