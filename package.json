@@ -39,7 +39,7 @@
     "country-data": "0.0.31",
     "get-stdin": "7.0.0",
     "json-stable-stringify": "1.0.1",
-    "make-fetch-happen": "4.0.1",
+    "make-fetch-happen": "4.0.2",
     "minimatch": "3.0.4",
     "minimist": "1.2.0",
     "text-table": "^0.2.0"
@@ -47,9 +47,9 @@
   "devDependencies": {
     "eslint": "6.0.1",
     "eslint-config-silverwind": "4.0.2",
-    "semver": "6.1.2",
-    "terser": "4.0.1",
-    "updates": "8.2.0",
-    "ver": "5.0.2"
+    "semver": "6.2.0",
+    "terser": "4.1.2",
+    "updates": "8.4.1",
+    "ver": "5.1.2"
   }
 }
