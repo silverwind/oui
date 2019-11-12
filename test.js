@@ -21,13 +21,13 @@ async function main() {
 
   assert.equal(oui("20370"), null);
 
-  assert.throws(() => { oui(null); }, Error);
-  assert.throws(() => { oui(undefined); }, Error);
-  assert.throws(() => { oui([]); }, Error);
-  assert.throws(() => { oui("20370", {strict: true}); }, Error);
-  assert.throws(() => { oui("abcd", {strict: true}); }, Error);
-  assert.throws(() => { oui(null, {strict: true}); }, Error);
-  assert.throws(() => { oui(undefined, {strict: true}); }, Error);
+  assert.throws(() => {oui(null)}, Error);
+  assert.throws(() => {oui(undefined)}, Error);
+  assert.throws(() => {oui([])}, Error);
+  assert.throws(() => {oui("20370", {strict: true})}, Error);
+  assert.throws(() => {oui("abcd", {strict: true})}, Error);
+  assert.throws(() => {oui(null, {strict: true})}, Error);
+  assert.throws(() => {oui(undefined, {strict: true})}, Error);
 
   try {
     await oui.update({url: "abc"});
@@ -36,7 +36,7 @@ async function main() {
   }
 
   try {
-    await oui.update({test:true});
+    await oui.update({test: true});
   } catch (err) {
     assert(!(err instanceof Error));
   }

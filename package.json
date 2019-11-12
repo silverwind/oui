@@ -39,17 +39,17 @@
     "country-data": "0.0.31",
     "get-stdin": "7.0.0",
     "json-stable-stringify": "1.0.1",
-    "make-fetch-happen": "4.0.2",
+    "make-fetch-happen": "6.0.1",
     "minimatch": "3.0.4",
     "minimist": "1.2.0",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
-    "eslint": "6.0.1",
-    "eslint-config-silverwind": "4.0.2",
-    "semver": "6.2.0",
-    "terser": "4.1.2",
-    "updates": "8.4.1",
-    "ver": "5.1.2"
+    "eslint": "6.6.0",
+    "eslint-config-silverwind": "5.0.0",
+    "semver": "6.3.0",
+    "terser": "4.4.0",
+    "updates": "9.0.1",
+    "ver": "6.0.2"
   }
 }
