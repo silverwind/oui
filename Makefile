@@ -23,19 +23,19 @@ update:
 patch:
 	$(MAKE) test
 	$(MAKE) min
-	npx ver patch $(WEB) $(WEBMIN)
+	npx versions -C patch $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
 minor:
 	$(MAKE) test
 	$(MAKE) min
-	npx ver minor $(WEB) $(WEBMIN)
+	npx versions -C minor $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
 major:
 	$(MAKE) test
 	$(MAKE) min
-	npx ver major $(WEB) $(WEBMIN)
+	npx versions -C major $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
 .PHONY: test min publish update patch minor major
