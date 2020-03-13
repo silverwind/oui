@@ -1,7 +1,12 @@
 "use strict";
 
 const oui = require(".");
+const nock = require("nock");
+const {join} = require("path");
 const {test, expect} = global;
+
+nock("https://linuxnet.ca").persist().get("/ieee/oui.txt").replyWithFile(200, join(__dirname, "fixtures/sanitized.txt"));
+nock("http://standards.ieee.org").persist().get("/develop/regauth/oui/oui.txt").replyWithFile(200, join(__dirname, "fixtures/sanitized.txt"));
 
 test("oui", () => {
   expect(oui("203706")).toMatch(/cisco/i);
@@ -27,5 +32,10 @@ test("oui.search", () => {
 });
 
 test("oui.update", async () => {
-  expect(await oui.update({test: true})).toBe(undefined);
+  const results = await Promise.all([
+    oui.update(),
+    oui.update({url: "https://linuxnet.ca/ieee/oui.txt"}),
+    oui.update({url: "http://standards.ieee.org/develop/regauth/oui/oui.txt"}),
+  ]);
+  expect(results).toEqual([undefined, undefined, undefined]);
 });
