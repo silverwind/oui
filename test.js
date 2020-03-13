@@ -27,5 +27,5 @@ test("oui.search", () => {
 });
 
 test("oui.update", async () => {
-  expect(await oui.update({test: true})).toBeTruthy();
+  expect(await oui.update({test: true})).toBe(undefined);
 });
