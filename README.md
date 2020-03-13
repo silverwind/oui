@@ -69,7 +69,7 @@ Returns: Either a string, or `null` if no matches are found. Throws if input is 
 
 ### oui.update([options])
 - `options` *Object*: A optional options object.
-  - `url` *string*: The URL from where to retrieve `oui.txt`. Defaults to `'http://linuxnet.ca/ieee/oui.txt'`. To use the more frequently updated but inconsistent and slower to download original file from IEEE, use `'http://standards.ieee.org/develop/regauth/oui/oui.txt'`.
+  - `url` *string*: The URL from where to retrieve `oui.txt`. Defaults to `'https://linuxnet.ca/ieee/oui.txt'`. To use the more frequently updated but inconsistent and slower to download original file from IEEE, use `'http://standards.ieee.org/develop/regauth/oui/oui.txt'`.
   - `file` *string*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to the `oui.json` in the module directory.
 
 Returns: A Promise that indicates when the internal database has been updated. Rejects on error.
