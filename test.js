@@ -32,10 +32,9 @@ test("oui.search", () => {
 });
 
 test("oui.update", async () => {
-  const results = await Promise.all([
+  expect(await Promise.all([
     oui.update(),
     oui.update({url: "https://linuxnet.ca/ieee/oui.txt"}),
     oui.update({url: "http://standards.ieee.org/develop/regauth/oui/oui.txt"}),
-  ]);
-  expect(results).toEqual([undefined, undefined, undefined]);
+  ])).toEqual([undefined, undefined, undefined]);
 });
