@@ -1,5 +1,5 @@
 # oui
-[![](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![](https://img.shields.io/npm/dm/oui.svg)](https://www.npmjs.org/package/oui) [![](https://api.travis-ci.org/silverwind/oui.svg?style=flat)](https://travis-ci.org/silverwind/oui)
+[![](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![](https://img.shields.io/npm/dm/oui.svg)](https://www.npmjs.org/package/oui)
 > Look up MAC addresses for their vendor in the IEEE OUI database
 
 The data used in this module comes from the [Sanitized IEEE OUI Data](http://linuxnet.ca/ieee/oui/) which is updated once a week on Sunday. The module is also able self-update on demand.
@@ -36,13 +36,6 @@ $ npm install -g oui
 ## Examples (CLI)
 ```console
 $ oui 20:37:06:12:34:56
-Cisco Systems, Inc
-80 West Tasman Drive
-San Jose CA 94568
-United States
-```
-```console
-$ echo 203706 | oui
 Cisco Systems, Inc
 80 West Tasman Drive
 San Jose CA 94568

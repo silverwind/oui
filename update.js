@@ -25,7 +25,7 @@ module.exports = function update(opts) {
 
     const uri = url.parse(opts.url);
     if (!uri.protocol || !uri.hostname) {
-      return reject(new Error("Invalid source URL '" + opts.url + "'"));
+      return reject(new Error(`Invalid source URL '${opts.url}'`));
     }
 
     fetch(opts.url).then(res => res.text()).then(body => {
@@ -52,7 +52,7 @@ module.exports = function update(opts) {
         const web = path.join(__dirname, "oui.web.js");
         fs.readFile(web, "utf8", (err, js) => {
           if (err) return reject(err);
-          js = js.replace(/var db =.+/, "var db = " + stringify(resultShort) + ";");
+          js = js.replace(/var db =.+/, `var db = ${stringify(resultShort)};`);
           fs.writeFile(web, js, err => {
             if (err) return reject(err);
             resolve(result);
@@ -78,7 +78,7 @@ function parse(lines) {
 
       i += 3;
       while (!isStart(lines[i], lines[i + 1]) && i < lines.length) {
-        if (lines[i] && lines[i].trim()) owner += "\n" + lines[i].trim();
+        if (lines[i] && lines[i].trim()) owner += `\n${lines[i].trim()}`;
         i++;
       }
 
@@ -91,7 +91,7 @@ function parse(lines) {
       // replace country shortcodes
       const shortCode = (/\n([A-Z]{2})$/.exec(owner) || [])[1];
       if (shortCode && countries[shortCode]) {
-        owner = owner.replace(/\n.+$/, "\n" + countries[shortCode].name);
+        owner = owner.replace(/\n.+$/, `\n${countries[shortCode].name}`);
       }
 
       result[oui] = owner;

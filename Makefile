@@ -2,11 +2,11 @@ WEB := oui.web.js
 WEBMIN := oui.web.min.js
 
 test:
-	npx eslint --color --quiet index.js update.js test.js
-	node --trace-deprecation --throw-deprecation --trace-warnings test.js
+	yarn -s run eslint --color index.js update.js test.js
+	yarn -s run jest --color
 
 min:
-	npx terser $(WEB) -o $(WEBMIN) --mangle --compress --unsafe --comments "/oui/"
+	yarn -s run terser $(WEB) -o $(WEBMIN) --mangle --compress --unsafe --comments "/oui/"
 
 publish:
 	git push -u --tags origin master
@@ -17,25 +17,19 @@ deps:
 	npm i
 
 update:
-	npx updates -u
+	yarn -s run updates -u
 	$(MAKE) deps
 
-patch:
-	$(MAKE) test
-	$(MAKE) min
-	npx versions -C patch $(WEB) $(WEBMIN)
+patch: test min
+	yarn -s run versions -C patch $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
-minor:
-	$(MAKE) test
-	$(MAKE) min
-	npx versions -C minor $(WEB) $(WEBMIN)
+minor: test min
+	yarn -s run versions -C minor $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
-major:
-	$(MAKE) test
-	$(MAKE) min
-	npx versions -C major $(WEB) $(WEBMIN)
+major: test min
+	yarn -s run versions -C major $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
 .PHONY: test min publish update patch minor major

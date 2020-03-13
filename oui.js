@@ -2,15 +2,7 @@
 "use strict";
 
 process.title = "oui";
-
-require("get-stdin")().then(str => {
-  str = str.trim();
-  if (str) {
-    lookup(str);
-  } else {
-    parseArgs();
-  }
-});
+parseArgs();
 
 function parseArgs() {
   const args = require("minimist")(process.argv.slice(2), {
@@ -29,16 +21,16 @@ function parseArgs() {
       process.exit(0);
     }).catch(err => {
       clearInterval(interval);
-      process.stdout.write(err + "\n");
+      process.stdout.write(`${err}\n`);
       process.exit(1);
     });
   } else if (args._[0] === "search" || args.search) {
     const params = args.search ? args._ : args._.slice(1);
     search(params.map(pattern => {
-      return "*" + pattern + "*";
+      return `*${pattern}*`;
     }));
   } else if (!args._.length || args._[0] === "help" || args.help) {
-    process.stdout.write([
+    process.stdout.write(`${[
       "",
       "  Usage: oui [mac]|[command] [options]",
       "",
@@ -56,11 +48,11 @@ function parseArgs() {
       "    oui search cisco theory",
       "    echo 20:37:06:12:34:56 | oui",
       "    echo 203706 | oui",
-    ].join("\n") + "\n\n");
+    ].join("\n")}\n\n`);
     process.exit(0);
   } else if (args._[0] === "version" || args.v || args.V || args.version) {
     const pkg = require("path").join(__dirname, "package.json");
-    process.stdout.write(require(pkg).version + "\n");
+    process.stdout.write(`${require(pkg).version}\n`);
   } else {
     lookup(args._[0]);
   }
@@ -71,14 +63,14 @@ function lookup(str) {
   try {
     result = require(".")(str);
   } catch (err) {
-    process.stdout.write(err.message + "\n");
+    process.stdout.write(`${err.message}\n`);
     process.exit(1);
   }
 
   if (result) {
-    process.stdout.write(result + "\n");
+    process.stdout.write(`${result}\n`);
   } else {
-    process.stdout.write(str + " not found in database\n");
+    process.stdout.write(`${str} not found in database\n`);
   }
 
   process.exit(0);
@@ -100,6 +92,6 @@ function search(patterns) {
 
   const arr = [Object.keys(structured[0]).map(name => name.toUpperCase())];
   for (const entry of structured) arr.push(Object.values(entry).map(v => v || ""));
-  process.stdout.write(require("text-table")(arr, {hsep: "    "}) + "\n");
+  process.stdout.write(`${require("text-table")(arr, {hsep: "    "})}\n`);
   process.exit(0);
 }

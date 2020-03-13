@@ -6,9 +6,13 @@
   "repository": "silverwind/oui",
   "license": "BSD-2-Clause",
   "main": "index.js",
+  "bin": "./oui.js",
   "browser": "oui.web.min.js",
   "scripts": {
     "test": "make test"
+  },
+  "engines": {
+    "node": ">= 10"
   },
   "keywords": [
     "mac",
@@ -21,12 +25,6 @@
     "hardware",
     "organizationally unique identifier"
   ],
-  "bin": {
-    "oui": "oui.js"
-  },
-  "engines": {
-    "node": ">=8"
-  },
   "files": [
     "index.js",
     "oui.js",
@@ -35,21 +33,21 @@
     "oui.web.min.js"
   ],
   "dependencies": {
-    "char-spinner": "1.0.1",
-    "country-data": "0.0.31",
-    "get-stdin": "7.0.0",
-    "json-stable-stringify": "1.0.1",
-    "make-fetch-happen": "6.1.0",
-    "minimatch": "3.0.4",
-    "minimist": "1.2.0",
+    "char-spinner": "^1.0.1",
+    "country-data": "^0.0.31",
+    "json-stable-stringify": "^1.0.1",
+    "make-fetch-happen": "^8.0.4",
+    "minimatch": "^3.0.4",
+    "minimist": "^1.2.5",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
-    "eslint": "6.6.0",
-    "eslint-config-silverwind": "5.0.0",
-    "semver": "6.3.0",
-    "terser": "4.4.0",
-    "updates": "9.1.0",
-    "versions": "7.0.2"
+    "eslint": "6.8.0",
+    "eslint-config-silverwind": "10.0.1",
+    "jest": "25.1.0",
+    "semver": "7.1.3",
+    "terser": "4.6.6",
+    "updates": "10.2.3",
+    "versions": "8.2.5"
   }
 }
