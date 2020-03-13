@@ -7,7 +7,9 @@ const {test, expect, beforeAll, afterAll} = global;
 
 beforeAll(() => {
   nock("http://linuxnet.ca").persist().get("/ieee/oui.txt").replyWithFile(200, join(__dirname, "fixtures/sanitized.txt"));
+  nock("https://linuxnet.ca").persist().get("/ieee/oui.txt").replyWithFile(200, join(__dirname, "fixtures/sanitized.txt"));
   nock("http://standards.ieee.org").persist().get("/develop/regauth/oui/oui.txt").replyWithFile(200, join(__dirname, "fixtures/sanitized.txt"));
+  nock("https://standards.ieee.org").persist().get("/develop/regauth/oui/oui.txt").replyWithFile(200, join(__dirname, "fixtures/sanitized.txt"));
 });
 
 test("oui", () => {
