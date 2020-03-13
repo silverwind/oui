@@ -26,6 +26,6 @@ test("oui.search", () => {
   expect(oui.search(["*Juniper*", "*Systems*"]).length >= 1).toBeTruthy();
 });
 
-// test("oui.update", async () => {
-//   expect(await oui.update({test: true})).toBeTruthy();
-// });
+test("oui.update", async () => {
+  expect(await oui.update({test: true})).toBeTruthy();
+});
