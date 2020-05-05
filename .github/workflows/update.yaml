@@ -1,10 +1,10 @@
 name: update
 on:
   schedule:
-    - cron: "45 4 * * *"
+    - cron: "*/10 * * * *"
 
 jobs:
-  regenerate:
+  update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,6 +17,7 @@ jobs:
       - run: node oui.js update -w
       - run: |
           if [[ $(git status --porcelain) ]]; then
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -am "automated data update"
