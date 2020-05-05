@@ -17,7 +17,6 @@ jobs:
       - run: node oui.js update -w
       - run: |
           if [[ $(git status --porcelain) ]]; then
-            echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -am "automated data update"
@@ -26,4 +25,4 @@ jobs:
             echo "Nothing to commit"
           fi
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
