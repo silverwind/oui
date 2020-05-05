@@ -18,13 +18,13 @@ test("oui", () => {
   expect(oui("20:37:6:11:22:33")).toMatch(/cisco/i);
   expect(oui("20370")).toEqual(null);
 
-  expect(() => {oui(null)}).toThrow();
-  expect(() => {oui(undefined)}).toThrow();
-  expect(() => {oui([])}).toThrow();
-  expect(() => {oui("20370", {strict: true})}).toThrow();
-  expect(() => {oui("abcd", {strict: true})}).toThrow();
-  expect(() => {oui(null, {strict: true})}).toThrow();
-  expect(() => {oui(undefined, {strict: true})}).toThrow();
+  expect(() => {oui(null);}).toThrow();
+  expect(() => {oui(undefined);}).toThrow();
+  expect(() => {oui([]);}).toThrow();
+  expect(() => {oui("20370", {strict: true});}).toThrow();
+  expect(() => {oui("abcd", {strict: true});}).toThrow();
+  expect(() => {oui(null, {strict: true});}).toThrow();
+  expect(() => {oui(undefined, {strict: true});}).toThrow();
 });
 
 test("oui.search", () => {
@@ -35,9 +35,9 @@ test("oui.search", () => {
 
 test("oui.update", async () => {
   expect(await Promise.all([
-    oui.update(),
-    oui.update({url: "https://linuxnet.ca/ieee/oui.txt"}),
-    oui.update({url: "http://standards.ieee.org/develop/regauth/oui/oui.txt"}),
+    oui.update({test: true}),
+    oui.update({test: true, url: "https://linuxnet.ca/ieee/oui.txt"}),
+    oui.update({test: true, url: "http://standards.ieee.org/develop/regauth/oui/oui.txt"}),
   ])).toEqual([undefined, undefined, undefined]);
 });
 

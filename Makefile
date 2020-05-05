@@ -2,8 +2,8 @@ WEB := oui.web.js
 WEBMIN := oui.web.min.js
 
 test:
-	yarn -s run eslint --color index.js update.js test.js
-	yarn -s run jest --color
+	yarn -s run eslint index.js update.js test.js
+	yarn -s run jest
 
 min:
 	yarn -s run terser $(WEB) -o $(WEBMIN) --mangle --compress --unsafe --comments "/oui/"
@@ -14,7 +14,7 @@ publish:
 
 deps:
 	rm -rf node_modules
-	npm i
+	yarn
 
 update:
 	yarn -s run updates -u
