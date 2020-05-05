@@ -10,7 +10,7 @@ min:
 
 publish:
 	git push -u --tags origin master
-	npm publish --access public
+	npm publish
 
 deps:
 	rm -rf node_modules
