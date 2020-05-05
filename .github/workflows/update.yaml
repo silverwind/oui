@@ -1,7 +1,7 @@
 name: update
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/10 * * * *"
 
 jobs:
   regenerate:
