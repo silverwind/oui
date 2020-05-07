@@ -18,6 +18,7 @@ jobs:
       - run: node oui.js update -w
       - run: |
           if [[ $(git status --porcelain) ]]; then
+            git fetch --depth=1 origin +refs/tags/*:refs/tags/*
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -am "automated data update"
