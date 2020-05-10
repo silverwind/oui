@@ -17,7 +17,7 @@ jobs:
       - run: make deps
       - run: node oui.js update -w
       - run: |
-          if [[ $(git status --porcelain) ]]; then
+          if [[ $(git status --porcelain --untracked-files=no) ]]; then
             git fetch --depth=1 origin +refs/tags/*:refs/tags/*
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
