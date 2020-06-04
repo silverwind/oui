@@ -20,6 +20,9 @@ update:
 	yarn -s run updates -u
 	$(MAKE) deps
 
+data:
+	node oui.js update -w
+
 patch: test min
 	yarn -s run versions -C patch $(WEB) $(WEBMIN)
 	$(MAKE) publish
@@ -32,4 +35,4 @@ major: test min
 	yarn -s run versions -C major $(WEB) $(WEBMIN)
 	$(MAKE) publish
 
-.PHONY: test min publish update patch minor major
+.PHONY: test min publish update data patch minor major

@@ -15,7 +15,7 @@ jobs:
           node-version: "14"
           registry-url: https://registry.npmjs.org
       - run: make deps
-      - run: node oui.js update -w
+      - run: make data
       - run: |
           if [[ $(git status --porcelain --untracked-files=no) ]]; then
             make test
