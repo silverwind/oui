@@ -6,7 +6,7 @@ const path = require("path");
 const url = require("url");
 
 const countries = require("country-data").countries;
-const fetch = require("make-fetch-happen");
+const fetch = require("fetch-enhanced")(require("node-fetch"));
 const stringify = require("json-stable-stringify");
 
 const stringifyOpts = {

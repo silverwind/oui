@@ -35,10 +35,11 @@
   "dependencies": {
     "char-spinner": "^1.0.1",
     "country-data": "^0.0.31",
+    "fetch-enhanced": "^4.0.2",
     "json-stable-stringify": "^1.0.1",
-    "make-fetch-happen": "^8.0.7",
     "minimatch": "^3.0.4",
     "minimist": "^1.2.5",
+    "node-fetch": "^2.6.1",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
