@@ -29,7 +29,7 @@ module.exports = function update(opts) {
     }
 
     fetch(opts.url).then(res => res.text()).then(body => {
-      if (!body || !body.length || !/^(OUI|[#]|[A-Fa-f0-9])/.exec(body)) {
+      if (!body || !body.length || !/^(OUI|[#]|[A-Fa-f0-9])/.test(body)) {
         throw new Error("Downloaded file does not look like a oui.txt file");
       } else {
         return parse(body.split("\n"));
@@ -72,7 +72,7 @@ function parse(lines) {
   let i = 3;
   while (i !== lines.length) {
     if (isStart(lines[i], lines[i + 1])) {
-      let oui   = lines[i + 2].substring(0, 6).trim();
+      let oui = lines[i + 2].substring(0, 6).trim();
       let owner = lines[i + 1].replace(/\((hex|base 16)\)/, "").substring(10).trim();
 
       i += 3;
