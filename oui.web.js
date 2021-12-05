@@ -1,4 +1,4 @@
-/*! oui web v11.0.94 | (c) silverwind | BSD license */
+/*! oui web v11.0.95 | (c) silverwind | BSD license */
 /* eslint-disable no-var */
 (function(m) {
   if (typeof exports === "object" && typeof module === "object") {
