@@ -2,7 +2,7 @@
 [![](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![](https://img.shields.io/npm/dm/oui.svg)](https://www.npmjs.org/package/oui)
 > Look up MAC addresses for their vendor in the IEEE OUI database
 
-The data used in this module comes from the [Sanitized IEEE OUI Data](http://linuxnet.ca/ieee/oui/) which is updated once a week on Sunday. The module is also able self-update on demand.
+The data used in this module comes from the [IEEE OUI Data](https://standards-oui.ieee.org/oui/oui.txt) which is updated once a week on Sunday. The module is also able self-update on demand.
 
 ## Installation
 ```console
@@ -69,7 +69,7 @@ Returns: Either a string, or `null` if no matches are found. Throws if input is 
 
 ### oui.update([options])
 - `options` *Object*: A optional options object.
-  - `url` *string*: The URL from where to retrieve `oui.txt`. Defaults to `'https://linuxnet.ca/ieee/oui.txt'`. To use the more frequently updated but inconsistent and slower to download original file from IEEE, use `'http://standards.ieee.org/develop/regauth/oui/oui.txt'`.
+  - `url` *string*: The URL from where to retrieve `oui.txt`. Default `"https://standards-oui.ieee.org/oui/oui.txt"`.
   - `file` *string*: A absolute file path for `oui.json`, which is used to store the parsed oui data. Defaults to the `oui.json` in the module directory.
 
 Returns: A Promise that indicates when the internal database has been updated. Rejects on error.

@@ -19,7 +19,7 @@ const stringifyOpts = {
 module.exports = function update(opts) {
   return new Promise((resolve, reject) => {
     opts = Object.assign({
-      url: "https://linuxnet.ca/ieee/oui.txt",
+      url: "https://standards-oui.ieee.org/oui/oui.txt",
       file: path.join(__dirname, "oui.json"),
     }, opts);
 

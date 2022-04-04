@@ -7,7 +7,7 @@ const {test, expect, beforeAll, afterAll} = global;
 
 beforeAll(() => {
   nock("https://linuxnet.ca").persist().get("/ieee/oui.txt").replyWithFile(200, join(__dirname, "fixtures/sanitized.txt"));
-  nock("http://standards.ieee.org").persist().get("/develop/regauth/oui/oui.txt").replyWithFile(200, join(__dirname, "fixtures/ieee.txt"));
+  nock("https://standards-oui.ieee.org").persist().get("/oui/oui.txt").replyWithFile(200, join(__dirname, "fixtures/ieee.txt"));
 });
 
 test("oui", () => {
@@ -37,7 +37,7 @@ test("oui.update", async () => {
   expect(await Promise.all([
     oui.update({test: true}),
     oui.update({test: true, url: "https://linuxnet.ca/ieee/oui.txt"}),
-    oui.update({test: true, url: "http://standards.ieee.org/develop/regauth/oui/oui.txt"}),
+    oui.update({test: true, url: "https://standards-oui.ieee.org/oui/oui.txt"}),
   ])).toEqual([undefined, undefined, undefined]);
 });
 
