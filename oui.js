@@ -14,7 +14,6 @@ function parseArgs() {
     const interval = require("char-spinner")();
     const opts = {};
     if (args._[1]) opts.url = args._[1];
-    if (args.w) opts.web = true;
 
     require("./update.js")(opts).then(() => {
       clearInterval(interval);
@@ -38,8 +37,7 @@ function parseArgs() {
       "    [mac]                look up a MAC address in the database",
       "    search [patterns]    search vendors using one or more search patterns",
       "    version              print the version",
-      "    update [url] [-w]    update the database with optional source URL. If -w",
-      "                         is given, oui.web.js will also be updated.",
+      "    update [url]         update the database with optional source URL",
       "",
       "  Examples:",
       "    oui 20:37:06:12:34:56",

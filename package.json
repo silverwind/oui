@@ -7,13 +7,6 @@
   "license": "BSD-2-Clause",
   "main": "index.js",
   "bin": "./oui.js",
-  "browser": "oui.web.min.js",
-  "scripts": {
-    "test": "make test"
-  },
-  "engines": {
-    "node": ">= 10"
-  },
   "keywords": [
     "mac",
     "address",
@@ -28,9 +21,8 @@
   "files": [
     "index.js",
     "oui.js",
-    "update.js",
     "oui.json",
-    "oui.web.min.js"
+    "update.js"
   ],
   "dependencies": {
     "char-spinner": "^1.0.1",

@@ -40,23 +40,7 @@ module.exports = function update(opts) {
       // save oui.js
       fs.writeFile(opts.file, stringify(result, stringifyOpts), err => {
         if (err) return reject(err);
-        if (!opts.web) return resolve(result);
-
-        // update oui.web.js
-        const resultShort = {};
-        Object.keys(result).map(key => {
-          resultShort[key] = result[key].match(/^.*$/m)[0];
-        });
-
-        const web = path.join(__dirname, "oui.web.js");
-        fs.readFile(web, "utf8", (err, js) => {
-          if (err) return reject(err);
-          js = js.replace(/var db =.+/, `var db = ${stringify(resultShort)};`);
-          fs.writeFile(web, js, err => {
-            if (err) return reject(err);
-            resolve(result);
-          });
-        });
+        resolve(result);
       });
     }).catch(reject);
   });

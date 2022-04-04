@@ -1,6 +1,3 @@
-WEB := oui.web.js
-WEBMIN := oui.web.min.js
-
 node_modules: package-lock.json
 	npm install --no-save
 	@touch node_modules
@@ -13,12 +10,8 @@ lint: node_modules
 	npx eslint --color index.js update.js test.js
 
 .PHONY: test
-test: node_modules lint build
+test: node_modules lint
 	npx jest
-
-.PHONY: build
-build: node_modules
-	npx terser $(WEB) -o $(WEBMIN) --mangle --compress --unsafe --comments "/oui/"
 
 .PHONY: publish
 publish: node_modules
@@ -36,16 +29,16 @@ data: node_modules
 	node oui.js update -w
 
 .PHONY: patch
-patch: node_modules test build
-	npx versions -C patch $(WEB) $(WEBMIN)
+patch: node_modules test
+	npx versions -C patch
 	@$(MAKE) --no-print-directory publish
 
 .PHONY: minor
-minor: node_modules test build
-	npx versions -C minor $(WEB) $(WEBMIN)
+minor: node_modules test
+	npx versions -C minor
 	@$(MAKE) --no-print-directory publish
 
 .PHONY: major
-major: node_modules test build
-	npx versions -C major $(WEB) $(WEBMIN)
+major: node_modules test
+	npx versions -C major
 	@$(MAKE) --no-print-directory publish
