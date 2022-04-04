@@ -51,9 +51,5 @@
     "terser": "5.6.0",
     "updates": "11.4.3",
     "versions": "8.4.5"
-  },
-  "jest": {
-    "verbose": false,
-    "testTimeout": 60000
   }
 }
