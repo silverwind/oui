@@ -49,7 +49,7 @@ function parseArgs() {
     ].join("\n")}\n\n`);
     process.exit(0);
   } else if (args._[0] === "version" || args.v || args.V || args.version) {
-    const pkg = require("path").join(__dirname, "package.json");
+    const pkg = require("node:path").join(__dirname, "package.json");
     process.stdout.write(`${require(pkg).version}\n`);
   } else {
     lookup(args._[0]);
@@ -82,11 +82,11 @@ function search(patterns) {
   }
 
   const structured = [];
-  results.forEach(result => {
+  for (const result of results) {
     const oui = result.oui;
     const [organzation, address, country] = result.organization.split("\n");
     structured.push({oui, organzation, address, country});
-  });
+  }
 
   const arr = [Object.keys(structured[0]).map(name => name.toUpperCase())];
   for (const entry of structured) arr.push(Object.values(entry).map(v => v || ""));

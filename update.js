@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 "use strict";
 
-const fs = require("fs");
-const path = require("path");
-const url = require("url");
+const fs = require("node:fs");
+const path = require("node:path");
+const url = require("node:url");
 
 const countries = require("country-data").countries;
 const fetch = require("fetch-enhanced")(require("node-fetch"));
@@ -18,10 +18,8 @@ const stringifyOpts = {
 
 module.exports = function update(opts) {
   return new Promise((resolve, reject) => {
-    opts = Object.assign({
-      url: "https://standards-oui.ieee.org/oui/oui.txt",
-      file: path.join(__dirname, "oui.json"),
-    }, opts);
+    opts = {url: "https://standards-oui.ieee.org/oui/oui.txt",
+      file: path.join(__dirname, "oui.json"), ...opts};
 
     const uri = url.parse(opts.url);
     if (!uri.protocol || !uri.hostname) {
@@ -69,7 +67,7 @@ function parse(lines) {
       oui = oui.toUpperCase();
 
       // remove excessive whitespace
-      owner = owner.replace(/[ \t]+/gm, " ");
+      owner = owner.replace(/[ \t]+/g, " ");
 
       // replace country shortcodes
       const shortCode = (/\n([A-Z]{2})$/.exec(owner) || [])[1];

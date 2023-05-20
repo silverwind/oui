@@ -2,7 +2,7 @@
 
 const oui = require(".");
 const nock = require("nock");
-const {join} = require("path");
+const {join} = require("node:path");
 const {test, expect, beforeAll, afterAll} = global;
 
 beforeAll(() => {

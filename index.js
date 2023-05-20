@@ -50,7 +50,7 @@ module.exports.search = (inputs, opts = {}) => {
 
 module.exports.update = (opts) => {
   return new Promise((resolve, reject) => {
-    opts = Object.assign({cli: false}, opts);
+    opts = {cli: false, ...opts};
     require("./update.js")(opts).then(newdb => {
       dbs["./oui.json"] = newdb;
       resolve();
