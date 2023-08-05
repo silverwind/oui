@@ -35,7 +35,7 @@ module.exports = function update(opts) {
     }).then(result => {
       if (opts.test) return resolve(result);
 
-      // save oui.js
+      // save oui.json
       fs.writeFile(opts.file, stringify(result, stringifyOpts), err => {
         if (err) return reject(err);
         resolve(result);
