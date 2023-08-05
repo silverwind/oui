@@ -10,12 +10,16 @@ function parseArgs() {
     string: ["_"],
   });
 
-  if (args._[0] === "update" || args.update) {
+  if (args._[0] === "update" || args._[0] === "update-with-csv" || args.update) {
     const interval = require("char-spinner")();
     const opts = {};
     if (args._[1]) opts.url = args._[1];
 
-    require("./update.js")(opts).then(() => {
+    let update =
+      args._[0] === "update-with-csv" ?
+      "./update-csv.js" :
+      "./update.js";
+    require(update)(opts).then(() => {
       clearInterval(interval);
       process.exit(0);
     }).catch(err => {

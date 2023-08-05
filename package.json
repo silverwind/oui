@@ -27,6 +27,7 @@
   "dependencies": {
     "char-spinner": "^1.0.1",
     "country-data": "^0.0.31",
+    "csv-parse": "^5.4.0",
     "fetch-enhanced": "5.0.2",
     "json-stable-stringify": "^1.0.1",
     "minimatch": "^3.0.4",
