@@ -2,46 +2,28 @@
   "name": "oui",
   "version": "12.0.76",
   "author": "silverwind <me@silverwind.io>",
-  "description": "Look up MAC addresses for their vendor in the IEEE OUI database",
+  "description": "CLI to look up MAC addresses for their vendor in the IEEE OUI database",
   "repository": "silverwind/oui",
   "license": "BSD-2-Clause",
-  "main": "index.js",
-  "bin": "./oui.js",
-  "keywords": [
-    "mac",
-    "address",
-    "mac address",
-    "oui",
-    "lookup",
-    "database",
-    "ieee",
-    "hardware",
-    "organizationally unique identifier"
-  ],
+  "type": "module",
+  "bin": "./bin/oui.js",
   "files": [
-    "index.js",
-    "oui.js",
-    "oui.json",
-    "update.js"
+    "./bin/oui.js"
   ],
   "dependencies": {
-    "char-spinner": "^1.0.1",
-    "country-data": "^0.0.31",
-    "fetch-enhanced": "5.0.2",
-    "json-stable-stringify": "^1.0.1",
-    "minimatch": "^3.0.4",
-    "minimist": "^1.2.5",
-    "node-fetch": "^2.6.1",
-    "text-table": "^0.2.0"
+    "oui-data": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "8.41.0",
-    "eslint-config-silverwind": "73.0.0",
-    "nock": "13.3.1",
-    "semver": "7.3.4",
-    "terser": "5.6.0",
-    "updates": "14.1.0",
-    "versions": "11.0.0",
-    "vitest": "0.31.1"
+    "@babel/eslint-parser": "7.22.15",
+    "@babel/plugin-syntax-import-assertions": "7.22.5",
+    "esbuild": "0.19.4",
+    "eslint": "8.50.0",
+    "eslint-config-silverwind": "76.0.3",
+    "execa": "8.0.1",
+    "minimist": "1.2.8",
+    "updates": "15.0.2",
+    "versions": "11.1.0",
+    "vitest": "0.34.6",
+    "vitest-config-silverwind": "3.0.0"
   }
 }

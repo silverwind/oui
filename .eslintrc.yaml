@@ -1,7 +1,12 @@
 root: true
 extends: silverwind
 
-rules:
-  import/no-commonjs: [0]
-  no-restricted-globals: [0]
-  import/no-unused-modules: [0]
+# espree can't into import assertions
+parser: "@babel/eslint-parser"
+parserOptions:
+  requireConfigFile: false
+  babelOptions:
+    plugins: ["@babel/plugin-syntax-import-assertions"]
+
+ignorePatterns:
+ - /bin/
