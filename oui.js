@@ -1,43 +1,41 @@
 #!/usr/bin/env node
 import minimist from "minimist";
-import process from "node:process";
+import {exit, argv, stdout} from "node:process";
 import {createRequire} from "node:module";
 
-function exit(err) {
+function end(err) {
   if (err) console.error(err);
-  process.exit(err ? 1 : 0);
+  exit(err ? 1 : 0);
 }
 
 async function main() {
-  process.title = "oui";
-  const args = minimist(process.argv.slice(2), {boolean: true, string: ["_"]});
+  const args = minimist(argv.slice(2), {boolean: true, string: ["_"]});
 
   if (!args._.length || args._[0] === "help" || args.help) {
-    process.stdout.write(`${[
+    stdout.write(`${[
+      "Usage: oui [mac]",
       "",
-      "  Usage: oui [mac]",
+      "Commands:",
+      "  [mac]    look up a MAC address in the database",
+      "  version  print the version",
       "",
-      "  Commands:",
-      "    [mac]                look up a MAC address in the database",
-      "    version              print the version",
-      "",
-      "  Examples:",
-      "    oui 20:37:06:12:34:56",
-      "    oui 20_37_06",
-      "    oui 203706",
-    ].join("\n")}\n\n`);
-    process.exit(0);
+      "Examples:",
+      "  oui 20:37:06:12:34:56",
+      "  oui 20_37_06",
+      "  oui 203706",
+    ].join("\n")}\n`);
+    exit(0);
   } else if (args._[0] === "version" || args.v || args.V || args.version) {
-    process.stdout.write(`${import.meta.VERSION || "0.0.0"}\n`);
+    stdout.write(`${import.meta.VERSION || "0.0.0"}\n`);
   } else {
     const ouiData = createRequire(import.meta.url)("oui-data");
     const result = ouiData[args._[0].replace(/[^0-9a-f]/gi, "").toUpperCase().substring(0, 6)];
     if (result) {
-      process.stdout.write(`${result}\n`);
+      stdout.write(`${result}\n`);
     } else {
-      process.stdout.write(`${args._[0]} not found in database\n`);
+      stdout.write(`${args._[0]} not found in database\n`);
     }
   }
 }
 
-main().then(exit).catch(exit);
+main().then(end).catch(end);
