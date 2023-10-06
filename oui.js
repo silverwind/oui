@@ -1,6 +1,7 @@
-#!/usr/bin/env node --no-warnings
+#!/usr/bin/env node
 import minimist from "minimist";
 import process from "node:process";
+import {createRequire} from "node:module";
 
 function exit(err) {
   if (err) console.error(err);
@@ -29,7 +30,7 @@ async function main() {
   } else if (args._[0] === "version" || args.v || args.V || args.version) {
     process.stdout.write(`${import.meta.VERSION || "0.0.0"}\n`);
   } else {
-    const {default: ouiData} = await import("oui-data", {assert: {type: "json"}});
+    const ouiData = createRequire(import.meta.url)("oui-data");
     const result = ouiData[args._[0].replace(/[^0-9a-f]/gi, "").toUpperCase().substring(0, 6)];
     if (result) {
       process.stdout.write(`${result}\n`);

@@ -1,12 +1,5 @@
 root: true
 extends: silverwind
 
-# espree can't into import assertions
-parser: "@babel/eslint-parser"
-parserOptions:
-  requireConfigFile: false
-  babelOptions:
-    plugins: ["@babel/plugin-syntax-import-assertions"]
-
 ignorePatterns:
  - /bin/

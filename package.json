@@ -14,8 +14,6 @@
     "oui-data": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.22.15",
-    "@babel/plugin-syntax-import-assertions": "7.22.5",
     "esbuild": "0.19.4",
     "eslint": "8.50.0",
     "eslint-config-silverwind": "76.0.3",
