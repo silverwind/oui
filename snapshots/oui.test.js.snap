@@ -6,3 +6,17 @@ exports[`cli 1`] = `
 San Jose CA 94568
 United States"
 `;
+
+exports[`cli 2`] = `
+"Cisco Systems, Inc
+80 West Tasman Drive
+San Jose CA 94568
+United States"
+`;
+
+exports[`cli 3`] = `
+"Cisco Systems, Inc
+80 West Tasman Drive
+San Jose CA 94568
+United States"
+`;

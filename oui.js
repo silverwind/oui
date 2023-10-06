@@ -14,7 +14,7 @@ async function main() {
   if (!args._.length || args._[0] === "help" || args.help) {
     process.stdout.write(`${[
       "",
-      "  Usage: oui [mac]|[command] [options]",
+      "  Usage: oui [mac]",
       "",
       "  Commands:",
       "    [mac]                look up a MAC address in the database",
@@ -22,18 +22,15 @@ async function main() {
       "",
       "  Examples:",
       "    oui 20:37:06:12:34:56",
+      "    oui 20_37_06",
       "    oui 203706",
-      "    oui update",
-      "    oui search cisco theory",
-      "    echo 20:37:06:12:34:56 | oui",
-      "    echo 203706 | oui",
     ].join("\n")}\n\n`);
     process.exit(0);
   } else if (args._[0] === "version" || args.v || args.V || args.version) {
     process.stdout.write(`${import.meta.VERSION || "0.0.0"}\n`);
   } else {
     const {default: ouiData} = await import("oui-data", {assert: {type: "json"}});
-    const result = ouiData[args._[0].replace(/:/g, "").toUpperCase().substring(0, 6)];
+    const result = ouiData[args._[0].replace(/[^0-9a-f]/gi, "").toUpperCase().substring(0, 6)];
     if (result) {
       process.stdout.write(`${result}\n`);
     } else {
