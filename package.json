@@ -11,17 +11,21 @@
     "./bin/oui.js"
   ],
   "dependencies": {
-    "oui-data": "^1.1.237"
+    "oui-data": "^1.1.396"
   },
   "devDependencies": {
-    "esbuild": "0.24.0",
+    "@types/minimist": "1.2.5",
+    "@types/node": "24.1.0",
+    "esbuild": "0.25.8",
     "eslint": "8.57.0",
-    "eslint-config-silverwind": "94.2.1",
-    "execa": "9.5.1",
+    "eslint-config-silverwind": "101.4.1",
+    "execa": "9.6.0",
     "minimist": "1.2.8",
-    "updates": "16.4.0",
-    "versions": "12.1.2",
-    "vitest": "2.1.8",
-    "vitest-config-silverwind": "9.2.0"
+    "typescript": "5.8.3",
+    "typescript-config-silverwind": "9.0.8",
+    "updates": "16.4.4",
+    "versions": "13.1.0",
+    "vitest": "3.2.4",
+    "vitest-config-silverwind": "10.2.0"
   }
 }

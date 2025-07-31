@@ -1,0 +1,11 @@
+{
+  "extends": "typescript-config-silverwind",
+  "compilerOptions": {
+    "strict": true,
+    "types": [
+      "jest-extended",
+      "vite/client",
+      "vitest/globals",
+    ],
+  },
+}

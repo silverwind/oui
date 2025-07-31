@@ -8,7 +8,7 @@ function end(err) {
   exit(err ? 1 : 0);
 }
 
-async function main() {
+async function main() { // eslint-disable-line @typescript-eslint/require-await
   const args = minimist(argv.slice(2), {boolean: true, string: ["_"]});
 
   if (!args._.length || args._[0] === "help" || args.help) {
