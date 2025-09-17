@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import minimist from "minimist";
 import {exit, argv, stdout} from "node:process";
 import {createRequire} from "node:module";
 import pkg from "./package.json" with {type: "json"};
@@ -10,9 +9,9 @@ function end(err: Error | void) {
 }
 
 async function main() { // eslint-disable-line @typescript-eslint/require-await
-  const args = minimist(argv.slice(2), {boolean: true, string: ["_"]});
+  const args = argv.slice(2);
 
-  if (!args._.length || args._[0] === "help" || args.help) {
+  if (!args.length || ["help", "--help"].includes(args[0])) {
     stdout.write(`${[
       "Usage: oui [mac]",
       "",
@@ -26,15 +25,15 @@ async function main() { // eslint-disable-line @typescript-eslint/require-await
       "  oui 203706",
     ].join("\n")}\n`);
     exit(0);
-  } else if (args._[0] === "version" || args.v || args.V || args.version) {
+  } else if (["version", "--version", "-v", "-V"].includes(args[0])) {
     stdout.write(`${pkg.version || "0.0.0"}\n`);
   } else {
     const ouiData = createRequire(import.meta.url)("oui-data");
-    const result = ouiData[args._[0].replace(/[^0-9a-f]/gi, "").toUpperCase().substring(0, 6)];
+    const result = ouiData[args[0].replace(/[^0-9a-f]/gi, "").toUpperCase().substring(0, 6)];
     if (result) {
       stdout.write(`${result}\n`);
     } else {
-      stdout.write(`${args._[0]} not found in database\n`);
+      stdout.write(`${args[0]} not found in database\n`);
     }
   }
 }
