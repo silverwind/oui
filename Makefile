@@ -1,5 +1,5 @@
-SRC := oui.js
-DST := bin/oui.js
+SOURCE_FILES := index.ts
+DIST_FILES := dist/index.js
 
 node_modules: package-lock.json
 	npm install --no-save
@@ -27,12 +27,11 @@ test-update: node_modules build
 	npx vitest -u
 
 .PHONY: build
-build: $(DST)
+build: node_modules $(DIST_FILES)
 
-$(DST): $(SRC) node_modules Makefile
-# workaround for https://github.com/evanw/esbuild/issues/1921
-	npx esbuild --log-level=warning --platform=node --target=node18 --format=esm --bundle --minify --legal-comments=none --banner:js="import {createRequire} from 'module';const require = createRequire(import.meta.url);" --define:import.meta.VERSION=\"$(shell jq .version package.json)\" --outfile=$(DST) $(SRC) --external:oui-data
-	chmod +x $(DST)
+$(DIST_FILES): $(SOURCE_FILES) package-lock.json vite.config.ts
+	npx vite build
+	chmod +x $(DIST_FILES)
 
 .PHONY: publish
 publish: node_modules
@@ -46,17 +45,17 @@ update: node_modules
 	npm install
 	@touch node_modules
 
-.PHONY: patch
+.PHONY: path
 patch: node_modules lint test
-	npx versions -c 'make --no-print-directory build' patch package.json package-lock.json
-	@$(MAKE) --no-print-directory publish
+	npx versions patch package.json package-lock.json
+	@$(MAKE) --no-print-directory build publish
 
 .PHONY: minor
 minor: node_modules lint test
-	npx versions -c 'make --no-print-directory build' minor package.json package-lock.json
-	@$(MAKE) --no-print-directory publish
+	npx versions minor package.json package-lock.json
+	@$(MAKE) --no-print-directory build publish
 
 .PHONY: major
 major: node_modules lint test
-	npx versions -c 'make --no-print-directory build' major package.json package-lock.json
-	@$(MAKE) --no-print-directory publish
+	npx versions major package.json package-lock.json
+	@$(MAKE) --no-print-directory build publish

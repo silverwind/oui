@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`cli 1`] = `
+"Cisco Systems, Inc
+80 West Tasman Drive
+San Jose CA 94568
+United States"
+`;
+
+exports[`cli 2`] = `
+"Cisco Systems, Inc
+80 West Tasman Drive
+San Jose CA 94568
+United States"
+`;
+
+exports[`cli 3`] = `
+"Cisco Systems, Inc
+80 West Tasman Drive
+San Jose CA 94568
+United States"
+`;

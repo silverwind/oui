@@ -2,8 +2,9 @@
 import minimist from "minimist";
 import {exit, argv, stdout} from "node:process";
 import {createRequire} from "node:module";
+import pkg from "./package.json" with {type: "json"};
 
-function end(err) {
+function end(err: Error | void) {
   if (err) console.error(err);
   exit(err ? 1 : 0);
 }
@@ -26,7 +27,7 @@ async function main() { // eslint-disable-line @typescript-eslint/require-await
     ].join("\n")}\n`);
     exit(0);
   } else if (args._[0] === "version" || args.v || args.V || args.version) {
-    stdout.write(`${import.meta.VERSION || "0.0.0"}\n`);
+    stdout.write(`${pkg.version || "0.0.0"}\n`);
   } else {
     const ouiData = createRequire(import.meta.url)("oui-data");
     const result = ouiData[args._[0].replace(/[^0-9a-f]/gi, "").toUpperCase().substring(0, 6)];
