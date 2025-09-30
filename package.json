@@ -11,19 +11,19 @@
     "dist"
   ],
   "dependencies": {
-    "oui-data": "^1.1.428"
+    "oui-data": "^1.1.438"
   },
   "devDependencies": {
-    "@types/node": "24.5.1",
-    "eslint": "9.35.0",
-    "eslint-config-silverwind": "103.0.6",
+    "@types/node": "24.6.0",
+    "eslint": "9.36.0",
+    "eslint-config-silverwind": "105.2.2",
     "nano-spawn": "1.0.3",
     "tsdown": "0.15.5",
     "tsdown-config-silverwind": "1.4.0",
     "typescript": "5.9.2",
-    "typescript-config-silverwind": "10.0.1",
-    "updates": "16.7.2",
-    "versions": "13.1.1",
+    "typescript-config-silverwind": "11.0.0",
+    "updates": "16.7.4",
+    "versions": "13.2.1",
     "vitest": "3.2.4",
     "vitest-config-silverwind": "10.2.0"
   }
