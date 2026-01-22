@@ -1,6 +1,6 @@
 {
   "name": "oui",
-  "version": "13.1.1",
+  "version": "13.1.2",
   "author": "silverwind <me@silverwind.io>",
   "description": "CLI to look up MAC addresses for their vendor in the IEEE OUI database",
   "repository": "silverwind/oui",
