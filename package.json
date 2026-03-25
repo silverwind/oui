@@ -6,6 +6,7 @@
   "repository": "silverwind/oui",
   "license": "BSD-2-Clause",
   "type": "module",
+  "sideEffects": false,
   "bin": "./dist/index.js",
   "files": [
     "dist"
