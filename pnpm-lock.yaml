@@ -55,8 +55,8 @@ importers:
         specifier: 4.1.4
         version: 4.1.4(@types/node@25.6.0)(@vitest/coverage-v8@4.1.4)(vite@8.0.9(@types/node@25.6.0))
       vitest-config-silverwind:
-        specifier: 11.3.0
-        version: 11.3.0(@vitest/coverage-v8@4.1.4)(typescript@6.0.3)(vite@8.0.9(@types/node@25.6.0))(vitest@4.1.4)
+        specifier: 11.3.3
+        version: 11.3.3(@vitest/coverage-v8@4.1.4)(typescript@6.0.3)(vite@8.0.9(@types/node@25.6.0))(vitest@4.1.4)
 
 packages:
 
@@ -1288,8 +1288,8 @@ packages:
       yaml:
         optional: true
 
-  vitest-config-silverwind@11.3.0:
-    resolution: {integrity: sha512-KP8TMlOVWHzjKSfmLqNPtaN48qrbwnAiZqgj/PogEa1iYTtCtOVLosIBnv9TXdzeX9808bMkExrikZaGn/4V3A==}
+  vitest-config-silverwind@11.3.3:
+    resolution: {integrity: sha512-bwwJZVEgCmsNYpROBVB2LCf+Bo2k051u4cnfOR4nZI16uFczxDOrWYqNY/y+zjLd2/XXiGeSNtQomDQ/JJ410w==}
     engines: {node: '>=20'}
     peerDependencies:
       '@vitest/coverage-v8': '*'
@@ -2420,7 +2420,7 @@ snapshots:
       '@types/node': 25.6.0
       fsevents: 2.3.3
 
-  vitest-config-silverwind@11.3.0(@vitest/coverage-v8@4.1.4)(typescript@6.0.3)(vite@8.0.9(@types/node@25.6.0))(vitest@4.1.4):
+  vitest-config-silverwind@11.3.3(@vitest/coverage-v8@4.1.4)(typescript@6.0.3)(vite@8.0.9(@types/node@25.6.0))(vitest@4.1.4):
     dependencies:
       '@vitest/coverage-v8': 4.1.4(vitest@4.1.4)
       jest-extended: 7.0.0(typescript@6.0.3)
