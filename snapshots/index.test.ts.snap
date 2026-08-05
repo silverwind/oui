@@ -20,3 +20,19 @@ exports[`cli 3`] = `
 San Jose CA 94568
 United States"
 `;
+
+exports[`cli 4`] = `
+"SYNERGY SYSTEMS AND SOLUTIONS
+A1526, GREEN FIELDS COLONY
+Faridabad HARYANA 121001
+India"
+`;
+
+exports[`cli 5`] = `
+"DATA ELECTRONIC DEVICES, INC
+32 NORTHWESTERN DR
+SALEM NH 03079
+United States"
+`;
+
+exports[`cli 6`] = `"FF:FF:FF:FF:FF:FF not found in database"`;

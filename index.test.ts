@@ -1,12 +1,8 @@
 import spawn from "nano-spawn";
 
-test("cli", async () => {
-  let stdout;
+const macs = ["20:37:06:12:34:56", "20_37_06", "203706", "c85ce27", "8C:1F:64:AF:A1:23", "FF:FF:FF:FF:FF:FF"];
 
-  ({stdout} = await spawn("node", ["./dist/index.js", "20:37:06:12:34:56"]));
-  expect(stdout).toMatchSnapshot();
-  ({stdout} = await spawn("node", ["./dist/index.js", "20_37_06"]));
-  expect(stdout).toMatchSnapshot();
-  ({stdout} = await spawn("node", ["./dist/index.js", "203706"]));
-  expect(stdout).toMatchSnapshot();
+test("cli", async () => {
+  const results = await Promise.all(macs.map(mac => spawn("node", ["./dist/index.js", mac])));
+  for (const {stdout} of results) expect(stdout).toMatchSnapshot();
 });

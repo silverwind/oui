@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import {exit, argv, stdout} from "node:process";
-import {createRequire} from "node:module";
 import pkg from "./package.json" with {type: "json"};
 
 const args = argv.slice(2);
@@ -15,14 +14,19 @@ if (!args.length || ["help", "--help"].includes(args[0])) {
     "",
     "Examples:",
     "  oui 20:37:06:12:34:56",
+    "  oui 8C1F64AFA",
     "  oui 20_37_06",
+    "  oui c85ce27",
     "  oui 203706",
   ].join("\n")}\n`);
 } else if (["version", "--version", "-v", "-V"].includes(args[0])) {
   stdout.write(`${pkg.version || "0.0.0"}\n`);
 } else {
-  const ouiData = createRequire(import.meta.url)("oui-data");
-  const result = ouiData[args[0].replace(/[^0-9a-f]/gi, "").toUpperCase().substring(0, 6)];
+  const load = async (name: string) => (await import(name, {with: {type: "json"}})).default;
+  const mac = args[0].replace(/[^0-9a-f]/gi, "").toUpperCase();
+  const result = (await load("oui-data/s"))[mac.substring(0, 9)] ??
+    (await load("oui-data/m"))[mac.substring(0, 7)] ??
+    (await load("oui-data/l"))[mac.substring(0, 6)];
   if (result) {
     stdout.write(`${result}\n`);
   } else {

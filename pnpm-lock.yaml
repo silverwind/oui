@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       oui-data:
-        specifier: ^1.1.571
-        version: 1.1.571
+        specifier: ^1.2.0
+        version: 1.2.0
     devDependencies:
       '@types/node':
         specifier: 25.7.0
@@ -1022,8 +1022,8 @@ packages:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
 
-  oui-data@1.1.571:
-    resolution: {integrity: sha512-T/GAmPkG5lfR14DrvHc7/TCw3kIjZVkLKmegkxP94qIQsObBtJExmozW1TuAaYU8uftuOYVyJxoGM+xg18e2TQ==}
+  oui-data@1.2.0:
+    resolution: {integrity: sha512-93PKtTmeZB2qKqqxfkQy7vXtvzyj8CPJ0iMOkC2vSBNgpFLFqucE4aPYSAJFmCPbgBXri1KPCciGotW/ueFrIg==}
 
   p-limit@3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
@@ -2195,7 +2195,7 @@ snapshots:
       type-check: 0.4.0
       word-wrap: 1.2.5
 
-  oui-data@1.1.571: {}
+  oui-data@1.2.0: {}
 
   p-limit@3.1.0:
     dependencies:

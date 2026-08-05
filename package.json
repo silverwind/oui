@@ -12,7 +12,7 @@
     "dist"
   ],
   "dependencies": {
-    "oui-data": "^1.1.571"
+    "oui-data": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "25.7.0",
