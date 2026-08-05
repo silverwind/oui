@@ -22,11 +22,9 @@ if (!args.length || ["help", "--help"].includes(args[0])) {
 } else if (["version", "--version", "-v", "-V"].includes(args[0])) {
   stdout.write(`${pkg.version || "0.0.0"}\n`);
 } else {
-  const load = async (name: string) => (await import(name, {with: {type: "json"}})).default;
+  const ouiData: Record<string, string> = (await import("oui-data", {with: {type: "json"}})).default;
   const mac = args[0].replace(/[^0-9a-f]/gi, "").toUpperCase();
-  const result = (await load("oui-data/s"))[mac.substring(0, 9)] ??
-    (await load("oui-data/m"))[mac.substring(0, 7)] ??
-    (await load("oui-data/l"))[mac.substring(0, 6)];
+  const result = ouiData[mac.substring(0, 9)] ?? ouiData[mac.substring(0, 7)] ?? ouiData[mac.substring(0, 6)];
   if (result) {
     stdout.write(`${result}\n`);
   } else {
