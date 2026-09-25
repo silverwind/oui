@@ -3,7 +3,10 @@
   "version": "13.3.1",
   "author": "silverwind <me@silverwind.io>",
   "description": "CLI to look up MAC addresses for their vendor in the IEEE OUI database",
-  "repository": "silverwind/oui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silverwind/oui.git"
+  },
   "license": "BSD-2-Clause",
   "type": "module",
   "sideEffects": false,
