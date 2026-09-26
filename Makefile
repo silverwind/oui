@@ -30,9 +30,12 @@ test-update: node_modules build
 .PHONY: build
 build: node_modules $(DIST_FILES)
 
-$(DIST_FILES): $(SOURCE_FILES) pnpm-lock.yaml package.json tsdown.config.ts
+$(DIST_FILES): $(SOURCE_FILES) pnpm-lock.yaml package.json tsconfig.json tsdown.config.ts
 	pnpm exec tsdown
-	chmod +x $(DIST_FILES)
+
+.PHONY: publish
+publish: node_modules
+	pnpm publish --no-git-checks
 
 .PHONY: update
 update: update-js update-actions
@@ -44,14 +47,10 @@ update-js: node_modules
 	pnpm install
 	@touch node_modules
 
-.PHONY: publish
-publish: node_modules
-	pnpm publish --no-git-checks
+.PHONY: update-actions
+update-actions: node_modules
+	pnpm exec updates -u -M actions
 
 .PHONY: patch minor major
 patch minor major: node_modules lint test
 	pnpm exec versions -R $@ package.json
-
-.PHONY: update-actions
-update-actions: node_modules
-	pnpm exec updates -u -M actions
