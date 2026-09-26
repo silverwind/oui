@@ -1,11 +1,15 @@
 # oui
 [![](https://img.shields.io/npm/v/oui.svg?style=flat)](https://www.npmjs.org/package/oui) [![](https://img.shields.io/npm/dm/oui.svg)](https://www.npmjs.org/package/oui) [![](https://packagephobia.com/badge?p=oui)](https://packagephobia.com/result?p=oui)
+
 > CLI to look up MAC addresses for their vendor in the IEEE OUI database
 
 ## Usage
-```console
-$ npm i -g oui
-$ oui 20:37:06:12:34:56
+
+```sh
+pnpm dlx oui 20:37:06:12:34:56
+```
+
+```
 Cisco Systems, Inc
 80 West Tasman Drive
 San Jose CA 94568
